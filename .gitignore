@@ -8,4 +8,6 @@
 # generated GUI files
 *R.java
 
+.project
 bin/**
+.classpath
