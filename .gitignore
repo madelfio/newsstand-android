@@ -7,3 +7,5 @@
 
 # generated GUI files
 *R.java
+
+bin/**
