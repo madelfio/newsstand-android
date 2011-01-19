@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh" />
+        <SeekBar 
+	        android:layout_height="wrap_content"  
+	        android:id="@+id/slider"
+	        android:layout_width="fill_parent" 
+	        android:padding="5px" 
+	        android:saveEnabled="true"  
+	        android:max="2" />
+	    
+
+    </LinearLayout>
+    <edu.umd.umiacs.newsstand.NewsStandMapView
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:apiKey="0tFo30MjqLT4E9o6W24dT2gT4J925MioUeiKphg"
+        />    
+</LinearLayout>

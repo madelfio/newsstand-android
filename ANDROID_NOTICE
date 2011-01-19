@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!-- git web interface version 1.7.3.GIT, (C) 2005-2006, Kay Sievers <kay.sievers@vrfy.org>, Christian Gierke -->
+<!-- git core binaries version 1.7.3.5 -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="generator" content="gitweb/1.7.3.GIT git/1.7.3.5"/>
+<meta name="robots" content="index, nofollow"/>
+<title>android.git.kernel.org Git - platform/frameworks/base.git/summary</title>
+<link rel="stylesheet" type="text/css" href="static/gitweb.css"/>
+<link rel="alternate" title="platform/frameworks/base.git - log - RSS feed" href="/?p=platform/frameworks/base.git;a=rss" type="application/rss+xml" />
+<link rel="alternate" title="platform/frameworks/base.git - log - RSS feed (no merges)" href="/?p=platform/frameworks/base.git;a=rss;opt=--no-merges" type="application/rss+xml" />
+<link rel="alternate" title="platform/frameworks/base.git - log - Atom feed" href="/?p=platform/frameworks/base.git;a=atom;opt=--no-merges" type="application/atom+xml" />
+<link rel="alternate" title="platform/frameworks/base.git - log - Atom feed (no merges)" href="/?p=platform/frameworks/base.git;a=atom;opt=--no-merges" type="application/atom+xml" />
+<link rel="shortcut icon" href="static/git-favicon.png" type="image/png" />
+</head>
+<body>
+<a href="http://source.android.com/">
+<img src="pub/android-banner1.gif" alt="Android Open Source Project" border="0" />
+</a>
+
+<p>
+To clone one of these trees, install
+<a href="http://www.kernel.org/pub/software/scm/git/">git</a>, and run:
+<blockquote>
+<code>git clone git://android.git.kernel.org/</code> + project path.
+</blockquote>
+</p>
+
+<p>
+To clone the entire platform, install
+
+<a href="http://source.android.com/source/git-repo.html">repo</a>, and run:
+<blockquote>
+<code>
+mkdir mydroid<br />
+cd mydroid<br />
+repo init -u git://android.git.kernel.org/platform/manifest.git<br />
+repo sync<br />
+</code>
+</blockquote>
+</p>
+
+<p>
+
+For more information about
+<a href="http://www.kernel.org/pub/software/scm/git/">git</a>, see an 
+<a href="http://git.or.cz/">overview</a>, the 
+<a href="http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html">tutorial</a>
+or the 
+<a href="http://www.kernel.org/pub/software/scm/git/docs">man pages</a>.
+</p>
+<div class="page_header">
+<a title="Android Git" href="http://android.git.kernel.org/"><img src="static/git-logo.png" width="72" height="27" alt="git" class="logo"/></a><a href="/">projects</a> / <a href="/?p=platform/frameworks/base.git;a=summary">platform/frameworks/base.git</a> / summary
+</div>
+<form method="get" action="/" enctype="application/x-www-form-urlencoded">
+<div class="search">
+<input name="p" type="hidden" value="platform/frameworks/base.git" />
+<input name="a" type="hidden" value="search" />
+<input name="h" type="hidden" value="HEAD" />
+<select name="st" >
+<option selected="selected" value="commit">commit</option>
+<option value="grep">grep</option>
+<option value="author">author</option>
+<option value="committer">committer</option>
+<option value="pickaxe">pickaxe</option>
+</select><sup><a href="/?p=platform/frameworks/base.git;a=search_help">?</a></sup> search:
+<input type="text" name="s"  />
+<span title="Extended regular expression"><label><input type="checkbox" name="sr" value="1" />re</label></span></div>
+</form>
+<div class="page_nav">
+summary | <a href="/?p=platform/frameworks/base.git;a=shortlog">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log">log</a> | <a href="/?p=platform/frameworks/base.git;a=commit;h=7d234fabe61cd5f034fe4ff4484209fbf5130c4d">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=7d234fabe61cd5f034fe4ff4484209fbf5130c4d">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree">tree</a><br/>
+<br/>
+</div>
+<div class="title">&nbsp;</div>
+<table class="projects_list">
+<tr id="metadata_desc"><td>description</td><td>Android framework classes and services</td></tr>
+<tr id="metadata_owner"><td>owner</td><td>Android Open Source Project</td></tr>
+<tr id="metadata_lchange"><td>last change</td><td>Fri, 14 Jan 2011 23:37:56 +0000</td></tr>
+<tr class="metadata_url"><td>URL</td><td>git://android.git.kernel.org/platform/frameworks/base.git</td></tr>
+<tr class="metadata_url"><td></td><td>http://android.git.kernel.org/platform/frameworks/base.git</td></tr>
+<tr class="metadata_url"><td></td><td>https://android.git.kernel.org/platform/frameworks/base.git</td></tr>
+</table>
+<div class="header">
+<a class="title" href="/?p=platform/frameworks/base.git;a=shortlog">shortlog</a>
+</div>
+<table class="shortlog">
+<tr class="dark">
+<td title="2011-01-14"><i>3 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Dianne Hackborn" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Dianne+Hackborn;st=author">Dianne Hackborn</a></td><td><a class="list subject" title="Merge &quot;Don't drop the drawable cache completely on configuration change&quot;" href="/?p=platform/frameworks/base.git;a=commit;h=7d234fabe61cd5f034fe4ff4484209fbf5130c4d">Merge &quot;Don't drop the drawable cache completely on... </a> <span class="refs"> <span class="head" title="heads/master"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/master">master</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=7d234fabe61cd5f034fe4ff4484209fbf5130c4d">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=7d234fabe61cd5f034fe4ff4484209fbf5130c4d">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=7d234fabe61cd5f034fe4ff4484209fbf5130c4d;hb=7d234fabe61cd5f034fe4ff4484209fbf5130c4d">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=7d234fabe61cd5f034fe4ff4484209fbf5130c4d;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-14"><i>3 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Dianne Hackborn" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Dianne+Hackborn;st=author">Dianne Hackborn</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=c3d0d860b6f9c6b5b09ef2ae62d59139453299dd">Merge &quot;Make the Phone options dialog use current language&quot;</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=c3d0d860b6f9c6b5b09ef2ae62d59139453299dd">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=c3d0d860b6f9c6b5b09ef2ae62d59139453299dd">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=c3d0d860b6f9c6b5b09ef2ae62d59139453299dd;hb=c3d0d860b6f9c6b5b09ef2ae62d59139453299dd">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=c3d0d860b6f9c6b5b09ef2ae62d59139453299dd;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="dark">
+<td title="2011-01-14"><i>3 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Dianne Hackborn" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Dianne+Hackborn;st=author">Dianne Hackborn</a></td><td><a class="list subject" title="Merge &quot;Added check to make orientation calculations more robust&quot;" href="/?p=platform/frameworks/base.git;a=commit;h=0950a3ef3610184858466a4dfeb1c11c3b1ed0aa">Merge &quot;Added check to make orientation calculations... </a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=0950a3ef3610184858466a4dfeb1c11c3b1ed0aa">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=0950a3ef3610184858466a4dfeb1c11c3b1ed0aa">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=0950a3ef3610184858466a4dfeb1c11c3b1ed0aa;hb=0950a3ef3610184858466a4dfeb1c11c3b1ed0aa">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=0950a3ef3610184858466a4dfeb1c11c3b1ed0aa;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-14"><i>4 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Anders Hammar1" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Anders+Hammar1;st=author">Anders Hammar1</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=b6e34769aebcd932c31f1ae0f008f5fa0662f638">Make the Phone options dialog use current language</a> <span class="refs"> <span class="change" title="changes/48/20448/1"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/changes/48/20448/1">48/20448/1</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=b6e34769aebcd932c31f1ae0f008f5fa0662f638">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=b6e34769aebcd932c31f1ae0f008f5fa0662f638">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=b6e34769aebcd932c31f1ae0f008f5fa0662f638;hb=b6e34769aebcd932c31f1ae0f008f5fa0662f638">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=b6e34769aebcd932c31f1ae0f008f5fa0662f638;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="dark">
+<td title="2011-01-14"><i>4 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Niclas Kellgren" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Niclas+Kellgren;st=author">Niclas Kellgren</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=494565ad1b0efe8ab70d23c61866748a9de66337">Added check to make orientation calculations more robust</a> <span class="refs"> <span class="change" title="changes/44/20444/1"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/changes/44/20444/1">44/20444/1</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=494565ad1b0efe8ab70d23c61866748a9de66337">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=494565ad1b0efe8ab70d23c61866748a9de66337">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=494565ad1b0efe8ab70d23c61866748a9de66337;hb=494565ad1b0efe8ab70d23c61866748a9de66337">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=494565ad1b0efe8ab70d23c61866748a9de66337;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-14"><i>4 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Christopher Lais" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Christopher+Lais;st=author"><span title="Christopher Lais">Christopher... </span></a></td><td><a class="list subject" title="Don't drop the drawable cache completely on configuration change" href="/?p=platform/frameworks/base.git;a=commit;h=8d71769b9bc3d0e72b26217d9059ce4473a91fe5">Don't drop the drawable cache completely on configurati... </a> <span class="refs"> <span class="change" title="changes/42/20442/1"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/changes/42/20442/1">42/20442/1</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=8d71769b9bc3d0e72b26217d9059ce4473a91fe5">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=8d71769b9bc3d0e72b26217d9059ce4473a91fe5">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=8d71769b9bc3d0e72b26217d9059ce4473a91fe5;hb=8d71769b9bc3d0e72b26217d9059ce4473a91fe5">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=8d71769b9bc3d0e72b26217d9059ce4473a91fe5;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="dark">
+<td title="2011-01-13"><i>4 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Gloria Wang" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Gloria+Wang;st=author">Gloria Wang</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=a220a2979937700024662be0f8fc166ca65506ed">Merge &quot;Initial OMA DRM forward lock contribution&quot;</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=a220a2979937700024662be0f8fc166ca65506ed">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=a220a2979937700024662be0f8fc166ca65506ed">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=a220a2979937700024662be0f8fc166ca65506ed;hb=a220a2979937700024662be0f8fc166ca65506ed">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=a220a2979937700024662be0f8fc166ca65506ed;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-12"><i>5 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Brad Fitzpatrick" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Brad+Fitzpatrick;st=author">Brad Fitzpatrick</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=bdb7aee0a4934eb138f7caaf921f6c86f350b4b7">Merge &quot;Fix for crash when setting live wallpaper.&quot;</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=bdb7aee0a4934eb138f7caaf921f6c86f350b4b7">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=bdb7aee0a4934eb138f7caaf921f6c86f350b4b7">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=bdb7aee0a4934eb138f7caaf921f6c86f350b4b7;hb=bdb7aee0a4934eb138f7caaf921f6c86f350b4b7">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=bdb7aee0a4934eb138f7caaf921f6c86f350b4b7;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="dark">
+<td title="2011-01-12"><i>6 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Mattias Petersson" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Mattias+Petersson;st=author">Mattias Petersson</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=d9463f50c8c1aa8969502b117777a4c185971c08">Fix for crash when setting live wallpaper.</a> <span class="refs"> <span class="change" title="changes/79/20379/2"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/changes/79/20379/2">79/20379/2</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=d9463f50c8c1aa8969502b117777a4c185971c08">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=d9463f50c8c1aa8969502b117777a4c185971c08">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=d9463f50c8c1aa8969502b117777a4c185971c08;hb=d9463f50c8c1aa8969502b117777a4c185971c08">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=d9463f50c8c1aa8969502b117777a4c185971c08;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-10"><i>8 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Brad Fitzpatrick" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Brad+Fitzpatrick;st=author">Brad Fitzpatrick</a></td><td><a class="list subject" title="Merge &quot;Closing cursor in finalizer to avoid GREF and fd leak in acore&quot;" href="/?p=platform/frameworks/base.git;a=commit;h=cb8427538dfdc5eae941e377b11bfd11a95fc5a5">Merge &quot;Closing cursor in finalizer to avoid GREF and... </a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=cb8427538dfdc5eae941e377b11bfd11a95fc5a5">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=cb8427538dfdc5eae941e377b11bfd11a95fc5a5">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=cb8427538dfdc5eae941e377b11bfd11a95fc5a5;hb=cb8427538dfdc5eae941e377b11bfd11a95fc5a5">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=cb8427538dfdc5eae941e377b11bfd11a95fc5a5;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="dark">
+<td title="2011-01-10"><i>8 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Johannes Carlsson" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Johannes+Carlsson;st=author">Johannes Carlsson</a></td><td><a class="list subject" title="Closing cursor in finalizer to avoid GREF and fd leak in acore" href="/?p=platform/frameworks/base.git;a=commit;h=872a52c6b637faf75262b83fe68ff4e0d9fe044c">Closing cursor in finalizer to avoid GREF and fd leak... </a> <span class="refs"> <span class="change" title="changes/89/19589/2"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/changes/89/19589/2">89/19589/2</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=872a52c6b637faf75262b83fe68ff4e0d9fe044c">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=872a52c6b637faf75262b83fe68ff4e0d9fe044c">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=872a52c6b637faf75262b83fe68ff4e0d9fe044c;hb=872a52c6b637faf75262b83fe68ff4e0d9fe044c">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=872a52c6b637faf75262b83fe68ff4e0d9fe044c;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-08"><i>10 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Romain Guy" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Romain+Guy;st=author">Romain Guy</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=fcf3d12d701e41d6e46bae8c13776f56d54f90e8">Merge &quot;Typo in Javadoc&quot;</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=fcf3d12d701e41d6e46bae8c13776f56d54f90e8">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=fcf3d12d701e41d6e46bae8c13776f56d54f90e8">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=fcf3d12d701e41d6e46bae8c13776f56d54f90e8;hb=fcf3d12d701e41d6e46bae8c13776f56d54f90e8">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=fcf3d12d701e41d6e46bae8c13776f56d54f90e8;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="dark">
+<td title="2011-01-08"><i>10 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Christian Mehlmauer" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Christian+Mehlmauer;st=author">Christian Mehlmauer</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=bd6fda11d287ba8ac749e06053dc9488653d1471">Typo in Javadoc</a> <span class="refs"> <span class="change" title="changes/78/20278/1"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/changes/78/20278/1">78/20278/1</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=bd6fda11d287ba8ac749e06053dc9488653d1471">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=bd6fda11d287ba8ac749e06053dc9488653d1471">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=bd6fda11d287ba8ac749e06053dc9488653d1471;hb=bd6fda11d287ba8ac749e06053dc9488653d1471">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=bd6fda11d287ba8ac749e06053dc9488653d1471;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-07"><i>10 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Gloria Wang" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Gloria+Wang;st=author">Gloria Wang</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=0544d05990c0f43a143e98e71f7fc60277872806">Merge &quot;DRM Framework bug fixes.&quot;</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=0544d05990c0f43a143e98e71f7fc60277872806">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=0544d05990c0f43a143e98e71f7fc60277872806">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=0544d05990c0f43a143e98e71f7fc60277872806;hb=0544d05990c0f43a143e98e71f7fc60277872806">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=0544d05990c0f43a143e98e71f7fc60277872806;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="dark">
+<td title="2011-01-07"><i>11 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Dianne Hackborn" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Dianne+Hackborn;st=author">Dianne Hackborn</a></td><td><a class="list subject" title="Merge &quot;Avoiding cyclic references when unbinding from a service&quot;" href="/?p=platform/frameworks/base.git;a=commit;h=3c902a62eddebc75adb5286e55e1107e0b63551f">Merge &quot;Avoiding cyclic references when unbinding from... </a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=3c902a62eddebc75adb5286e55e1107e0b63551f">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=3c902a62eddebc75adb5286e55e1107e0b63551f">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=3c902a62eddebc75adb5286e55e1107e0b63551f;hb=3c902a62eddebc75adb5286e55e1107e0b63551f">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=3c902a62eddebc75adb5286e55e1107e0b63551f;sf=tgz">snapshot</a></td>
+</tr>
+<tr class="light">
+<td title="2011-01-07"><i>11 days ago</i></td>
+<td class="author"><a title="Search for commits authored by Mattias Petersson" class="list" href="/?p=platform/frameworks/base.git;a=search;s=Mattias+Petersson;st=author">Mattias Petersson</a></td><td><a class="list subject" href="/?p=platform/frameworks/base.git;a=commit;h=5f619b7d95fae663e5c1326a576ad43251f5d49b">Avoiding cyclic references when unbinding from a service</a> <span class="refs"> <span class="change" title="changes/11/18611/3"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/changes/11/18611/3">11/18611/3</a></span></span></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=commit;h=5f619b7d95fae663e5c1326a576ad43251f5d49b">commit</a> | <a href="/?p=platform/frameworks/base.git;a=commitdiff;h=5f619b7d95fae663e5c1326a576ad43251f5d49b">commitdiff</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=5f619b7d95fae663e5c1326a576ad43251f5d49b;hb=5f619b7d95fae663e5c1326a576ad43251f5d49b">tree</a> | <a title="in format: tar.gz" href="/?p=platform/frameworks/base.git;a=snapshot;h=5f619b7d95fae663e5c1326a576ad43251f5d49b;sf=tgz">snapshot</a></td>
+</tr>
+<tr>
+<td colspan="4"><a href="/?p=platform/frameworks/base.git;a=shortlog">...</a></td>
+</tr>
+</table>
+<div class="header">
+<a class="title" href="/?p=platform/frameworks/base.git;a=tags">tags</a>
+</div>
+<table class="tags">
+<tr class="dark">
+<td><i>12 days ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=adba66b5d89fd8382c4f6b90d772942d86d5afbf">android-2.2.1_r2</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=04b689882f524950ae0472383bb4e8344bbfc90a">Android 2.2.1 release 2</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=04b689882f524950ae0472383bb4e8344bbfc90a">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=adba66b5d89fd8382c4f6b90d772942d86d5afbf">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-2.2.1_r2">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-2.2.1_r2">log</a></td>
+</tr><tr class="light">
+<td><i>3 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=6bcc7a7e5fc5a2340c4f060141bec9d181454807">android-2.3.1_r1</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=3c67ae161e4eb08f8aef11b6da768970a9e15ee7">Android 2.3.1 release 1</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=3c67ae161e4eb08f8aef11b6da768970a9e15ee7">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=6bcc7a7e5fc5a2340c4f060141bec9d181454807">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-2.3.1_r1">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-2.3.1_r1">log</a></td>
+</tr><tr class="dark">
+<td><i>4 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=6471cd5f7d0125713081c9be4772922eedd2a904">android-2.3_r1</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=bf4549a36a1f39c5fb7c6a07386fc665ecca3d5b">Android 2.3 release 1</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=bf4549a36a1f39c5fb7c6a07386fc665ecca3d5b">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=6471cd5f7d0125713081c9be4772922eedd2a904">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-2.3_r1">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-2.3_r1">log</a></td>
+</tr><tr class="light">
+<td><i>2 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=73e150c886afc6cd92e8b065a58d61e0b2a098ed">android-cts-2.2_r4</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=2b226f3e5f57f812bfddcb6cd3b5edb656e56f6a">Android CTS 2.2 release 4</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=2b226f3e5f57f812bfddcb6cd3b5edb656e56f6a">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=73e150c886afc6cd92e8b065a58d61e0b2a098ed">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-cts-2.2_r4">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-cts-2.2_r4">log</a></td>
+</tr><tr class="dark">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=f2960b8d66d7a20f590716f5e51160e77d0d1b24">android-adt-0.9.9</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=dd25d1584195f2d6776077607969374479748219">Android ADT 0.9.9</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=dd25d1584195f2d6776077607969374479748219">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=f2960b8d66d7a20f590716f5e51160e77d0d1b24">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-adt-0.9.9">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-adt-0.9.9">log</a></td>
+</tr><tr class="light">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=f3ee6f87a344b185d8bde12c77440c9020378510">android-adt-0.9.8</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=cf59a3caf5318c5b074d9c362103b6f0b2622726">Android ADT 0.9.8</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=cf59a3caf5318c5b074d9c362103b6f0b2622726">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=f3ee6f87a344b185d8bde12c77440c9020378510">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-adt-0.9.8">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-adt-0.9.8">log</a></td>
+</tr><tr class="dark">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=00ccd5d026fcd0e4b9d27dc5a9ffa13ca0408449">android-2.2_r1.2</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=58a8c559fa6009831923e1d74643ca6f22a48972">Android 2.2 release 1.2</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=58a8c559fa6009831923e1d74643ca6f22a48972">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=00ccd5d026fcd0e4b9d27dc5a9ffa13ca0408449">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-2.2_r1.2">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-2.2_r1.2">log</a></td>
+</tr><tr class="light">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=f1f07993792dbf2d49613d474a696ec0927828d2">android-2.2_r1.3</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=33025ceb9b2d11a88e153447a7111b46b4b3b289">Android 2.2 release 1.3</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=33025ceb9b2d11a88e153447a7111b46b4b3b289">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=f1f07993792dbf2d49613d474a696ec0927828d2">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-2.2_r1.3">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-2.2_r1.3">log</a></td>
+</tr><tr class="dark">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=ec721fd1db4d895b342cfb83c651e0b78afac4dd">android-2.2.1_r1</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=ff3bff6e21e6b88f87eb0e50d4ecad44ab64d1fe">Android 2.2.1 release 1</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=ff3bff6e21e6b88f87eb0e50d4ecad44ab64d1fe">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=ec721fd1db4d895b342cfb83c651e0b78afac4dd">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-2.2.1_r1">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-2.2.1_r1">log</a></td>
+</tr><tr class="light">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=9d3fa5764cb58dd8be7eae349f8ee3307e74ff8c">android-cts-2.2_r3</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=5f8edfea3015b66af67089549b0ab5cb9450e02d">Android 2.2 CTS release 3</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=5f8edfea3015b66af67089549b0ab5cb9450e02d">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=9d3fa5764cb58dd8be7eae349f8ee3307e74ff8c">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-cts-2.2_r3">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-cts-2.2_r3">log</a></td>
+</tr><tr class="dark">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=e9a83c49c7f5c2524226ddefc21105deb14d80db">android-cts-2.1_r5</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=16608d6318c17538a81c0fefd55fd635465e2536">Android 2.1 CTS release 5</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=16608d6318c17538a81c0fefd55fd635465e2536">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=e9a83c49c7f5c2524226ddefc21105deb14d80db">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-cts-2.1_r5">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-cts-2.1_r5">log</a></td>
+</tr><tr class="light">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=34c0b2ee11c237be5244eecc34814862b3003822">android-sdk-2.2_r2</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=4b37fbc6d31a7ccc53a71d34b8c411a6b1a10285">Android 2.2 SDK release 2</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=4b37fbc6d31a7ccc53a71d34b8c411a6b1a10285">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=34c0b2ee11c237be5244eecc34814862b3003822">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-sdk-2.2_r2">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-sdk-2.2_r2">log</a></td>
+</tr><tr class="dark">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=40c4020f8d10744a2dbebd76c03ed60e2e8efc2c">android-sdk-2.2_r1</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=27f420a14aeb863d8fb0061f83027eff3d8d790b">Android 2.2 SDK release 1</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=27f420a14aeb863d8fb0061f83027eff3d8d790b">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=40c4020f8d10744a2dbebd76c03ed60e2e8efc2c">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-sdk-2.2_r1">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-sdk-2.2_r1">log</a></td>
+</tr><tr class="light">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=9e5773a0904bc46e9183a6758ce30cff5cfcc541">android-sdk-tools_r6</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=ab6e536c41a2f5b03cb0188d5ce9bb1c84e8a633">Android SDK tools release 6</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=ab6e536c41a2f5b03cb0188d5ce9bb1c84e8a633">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=9e5773a0904bc46e9183a6758ce30cff5cfcc541">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-sdk-tools_r6">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-sdk-tools_r6">log</a></td>
+</tr><tr class="dark">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=f3ee6f87a344b185d8bde12c77440c9020378510">android-sdk-tools_r7</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=3d9e8f635efbf1a05892cab10b42e706fd5ffb59">Android SDK tools release 7</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=3d9e8f635efbf1a05892cab10b42e706fd5ffb59">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=f3ee6f87a344b185d8bde12c77440c9020378510">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-sdk-tools_r7">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-sdk-tools_r7">log</a></td>
+</tr><tr class="light">
+<td><i>4 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=commit;h=e9a83c49c7f5c2524226ddefc21105deb14d80db">android-cts-2.1_r4</a></td>
+<td><a class="list subject" href="/?p=platform/frameworks/base.git;a=tag;h=68de40b15e3dc40dcc3f05a449127a47826ea262">Android 2.1 CTS release 4</a></td>
+<td class="selflink"><a href="/?p=platform/frameworks/base.git;a=tag;h=68de40b15e3dc40dcc3f05a449127a47826ea262">tag</a></td>
+<td class="link"> | <a href="/?p=platform/frameworks/base.git;a=commit;h=e9a83c49c7f5c2524226ddefc21105deb14d80db">commit</a> | <a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/tags/android-cts-2.1_r4">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/tags/android-cts-2.1_r4">log</a></td>
+</tr><tr>
+<td colspan="5"><a href="/?p=platform/frameworks/base.git;a=tags">...</a></td>
+</tr>
+</table>
+<div class="header">
+<a class="title" href="/?p=platform/frameworks/base.git;a=heads">heads</a>
+</div>
+<table class="heads">
+<tr class="dark">
+<td><i>3 days ago</i></td>
+<td class="current_head"><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/master">master</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/master">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/master">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/master;hb=refs/heads/master">tree</a></td>
+</tr><tr class="light">
+<td><i>5 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/froyo-plus-aosp">froyo-plus-aosp</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/froyo-plus-aosp">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/froyo-plus-aosp">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/froyo-plus-aosp;hb=refs/heads/froyo-plus-aosp">tree</a></td>
+</tr><tr class="dark">
+<td><i>5 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/tools_r8">tools_r8</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/tools_r8">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/tools_r8">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/tools_r8;hb=refs/heads/tools_r8">tree</a></td>
+</tr><tr class="light">
+<td><i>5 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/tools_r9">tools_r9</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/tools_r9">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/tools_r9">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/tools_r9;hb=refs/heads/tools_r9">tree</a></td>
+</tr><tr class="dark">
+<td><i>5 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/gingerbread">gingerbread</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/gingerbread">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/gingerbread">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/gingerbread;hb=refs/heads/gingerbread">tree</a></td>
+</tr><tr class="light">
+<td><i>5 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/gingerbread-release">gingerbread-release</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/gingerbread-release">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/gingerbread-release">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/gingerbread-release;hb=refs/heads/gingerbread-release">tree</a></td>
+</tr><tr class="dark">
+<td><i>6 weeks ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/froyo">froyo</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/froyo">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/froyo">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/froyo;hb=refs/heads/froyo">tree</a></td>
+</tr><tr class="light">
+<td><i>2 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/froyo-release">froyo-release</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/froyo-release">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/froyo-release">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/froyo-release;hb=refs/heads/froyo-release">tree</a></td>
+</tr><tr class="dark">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair">eclair</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/eclair">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/eclair;hb=refs/heads/eclair">tree</a></td>
+</tr><tr class="light">
+<td><i>3 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/tools_r7">tools_r7</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/tools_r7">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/tools_r7">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/tools_r7;hb=refs/heads/tools_r7">tree</a></td>
+</tr><tr class="dark">
+<td><i>5 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/donut">donut</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/donut">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/donut">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/donut;hb=refs/heads/donut">tree</a></td>
+</tr><tr class="light">
+<td><i>10 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-passion-release">eclair-passion-release</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-passion-release">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/eclair-passion-release">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/eclair-passion-release;hb=refs/heads/eclair-passion-release">tree</a></td>
+</tr><tr class="dark">
+<td><i>10 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-sholes-release2">eclair-sholes-release2</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-sholes-release2">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/eclair-sholes-release2">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/eclair-sholes-release2;hb=refs/heads/eclair-sholes-release2">tree</a></td>
+</tr><tr class="light">
+<td><i>11 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-release">eclair-release</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-release">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/eclair-release">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/eclair-release;hb=refs/heads/eclair-release">tree</a></td>
+</tr><tr class="dark">
+<td><i>13 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-sholes-release">eclair-sholes-release</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/eclair-sholes-release">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/eclair-sholes-release">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/eclair-sholes-release;hb=refs/heads/eclair-sholes-release">tree</a></td>
+</tr><tr class="light">
+<td><i>13 months ago</i></td>
+<td><a class="list name" href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/donut-release2">donut-release2</a></td>
+<td class="link"><a href="/?p=platform/frameworks/base.git;a=shortlog;h=refs/heads/donut-release2">shortlog</a> | <a href="/?p=platform/frameworks/base.git;a=log;h=refs/heads/donut-release2">log</a> | <a href="/?p=platform/frameworks/base.git;a=tree;h=refs/heads/donut-release2;hb=refs/heads/donut-release2">tree</a></td>
+</tr><tr>
+<td colspan="3"><a href="/?p=platform/frameworks/base.git;a=heads">...</a></td>
+</tr>
+</table>
+<div class="page_footer">
+<div class="cachetime">Cache Last Updated: Tue Jan 18 18:48:48 2011 GMT</div>
+<!--
+	Full URL: |http://android.git.kernel.org/?p=platform/frameworks/base.git|
+	URL Hash: |542e0e9c0a5c3331c95767f99740bb2a|
+-->
+<div class="page_footer_text">Android framework classes and services</div>
+<a class="rss_logo" title="log RSS feed" href="/?p=platform/frameworks/base.git;a=rss">RSS</a>
+<a class="rss_logo" title="log Atom feed" href="/?p=platform/frameworks/base.git;a=atom">Atom</a>
+</div>
+<script type="text/javascript" src="static/gitweb.js"></script>
+</body>
+</html>

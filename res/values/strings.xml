@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overview">
+        AndroidExamples
+        \n\n
+        Demonstrates database usage, minimal UI/form, AsyncTask, and Application.
+        \n
+        For more information, see tutorial at totsp.com -- more to come.
+    </string>
+    <string name="app_name">UMD NewsStand</string>
+    <string name="in_label">Add name to database</string>
+    <string name="out_label">Current database contents</string>
+</resources>

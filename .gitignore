@@ -1,0 +1,9 @@
+# built application files
+*.apk
+*.ap_
+
+# Java class files
+*.class
+
+# generated GUI files
+*R.java
