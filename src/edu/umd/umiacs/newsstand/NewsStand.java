@@ -45,6 +45,7 @@ public class NewsStand extends MapActivity {
 
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
+        mapView.displayZoomControls(true);
 
         slider = (SeekBar) findViewById(R.id.slider);
 
@@ -128,18 +129,17 @@ public class NewsStand extends MapActivity {
 
         String marker_url = "http://newsstand.umiacs.umd.edu/news/xml_map?lat_low=%f&lat_high=%f&lon_low=%f&lon_high=%f";
         marker_url = String
-                .format(marker_url, lat_low / 1000000.0, lat_high / 1000000.0,
-                        lon_low / 1000000.0, lon_high / 1000000.0);
+                .format(marker_url, lat_low / 1.0E6, lat_high / 1.0E6,
+                        lon_low / 1.0E6, lon_high / 1.0E6);
         // Toast.makeText(getApplicationContext(), marker_url,
         // Toast.LENGTH_LONG).show();
 
         feed = getFeed(marker_url);
         for (int i = 0; i < feed.getMarkerCount(); i++) {
             MarkerInfo cur_marker = feed.getMarker(i);
-            GeoPoint point = new GeoPoint((int) (Float.valueOf(
-                    cur_marker.getLatitude()).floatValue() * 1000000),
-                    (int) (Float.valueOf(cur_marker.getLongitude())
-                            .floatValue() * 1000000));
+            GeoPoint point = new GeoPoint(
+                    (int) (Float.valueOf(cur_marker.getLatitude()).floatValue() * 1E6),
+                    (int) (Float.valueOf(cur_marker.getLongitude()).floatValue() * 1E6));
             OverlayItem overlayitem = new OverlayItem(point,
                     cur_marker.getTitle(), cur_marker.getSnippet());
 
@@ -194,7 +194,7 @@ public class NewsStand extends MapActivity {
             return theMarkerFeedHandler.getFeed();
         } catch (Exception ee) {
             // if we have a problem, simply return null
-            Toast.makeText(getApplicationContext(), ee.getMessage(),
+            Toast.makeText(getApplicationContext(), "Error fetching markers",
                     Toast.LENGTH_SHORT).show();
             return null;
         }
