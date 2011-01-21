@@ -2,6 +2,7 @@ package edu.umd.umiacs.newsstand;
 
 import java.net.URL;
 import java.util.List;
+import java.util.TimerTask;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -10,6 +11,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,8 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -28,7 +30,6 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 public class NewsStand extends MapActivity {
-    private MarkerFeed feed = null;
     private MapView mapView = null;
     private SeekBar slider = null;
 
@@ -52,8 +53,12 @@ public class NewsStand extends MapActivity {
         Button refreshButton = (Button) findViewById(R.id.refresh);
         refreshButton.setOnClickListener(new View.OnClickListener() {
 
-        public void onClick(View view) {
-                refreshMarkers();
+            public void onClick(View view) {
+                try {
+                    new MyAsyncTask().execute("");
+                } catch (Exception e) {
+                    Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
+                }
             }
         });
 
@@ -80,6 +85,12 @@ public class NewsStand extends MapActivity {
                 
             }
         });
+        
+        try {
+            new MyAsyncTask().execute("");
+        } catch (Exception e) {
+            Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
+        }
     }
 
     @Override
@@ -100,23 +111,13 @@ public class NewsStand extends MapActivity {
         case R.id.top_stories:
         default:
             Toast.makeText(getApplicationContext(),
-                    "Functionality not yet implemented", Toast.LENGTH_SHORT)
+                    "Functionality not yet implemented.", Toast.LENGTH_SHORT)
                     .show();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void refreshMarkers() {
-        List<Overlay> mapOverlays = mapView.getOverlays();
-        mapOverlays.clear();
-        Drawable drawable = this.getResources().getDrawable(
-                R.drawable.marker_general);
-        NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
-                drawable, this);
-
-        // Toast.makeText(getApplicationContext(), "Refreshing...",
-        // Toast.LENGTH_SHORT).show();
-
+    private MarkerFeed getMarkers() {
         // get map coordinates
         GeoPoint centerpoint = mapView.getMapCenter();
         int lat_span = mapView.getLatitudeSpan();
@@ -134,7 +135,16 @@ public class NewsStand extends MapActivity {
         // Toast.makeText(getApplicationContext(), marker_url,
         // Toast.LENGTH_LONG).show();
 
-        feed = getFeed(marker_url);
+        return getFeed(marker_url);
+    }
+    
+    private void setMarkers(MarkerFeed feed) {
+        List<Overlay> mapOverlays = mapView.getOverlays();
+        mapOverlays.clear();
+        Drawable drawable = this.getResources().getDrawable(
+                R.drawable.marker_general);
+        NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
+                drawable, this);
         for (int i = 0; i < feed.getMarkerCount(); i++) {
             MarkerInfo cur_marker = feed.getMarker(i);
             GeoPoint point = new GeoPoint(
@@ -163,11 +173,25 @@ public class NewsStand extends MapActivity {
             itemizedoverlay.addOverlay(overlayitem, this.getResources()
                     .getDrawable(my_marker));
         }
-        mapOverlays.add(itemizedoverlay);
-        mapView.invalidate();
+        if (feed.getMarkerCount() > 0) {
+        	mapOverlays.add(itemizedoverlay);
+        	mapView.invalidate();
+        }
 
         slider.setMax(feed.getMarkerCount());
+    
     }
+    
+    /*private void refreshMarkers() {
+
+    	MarkerFeed feed;
+    	
+        // Toast.makeText(getApplicationContext(), "Refreshing...",
+        // Toast.LENGTH_SHORT).show();
+        feed = getMarkers();
+        setMarkers(feed);
+        
+    }*/
 
     private MarkerFeed getFeed(String urlToRssFeed) {
         try {
@@ -199,4 +223,47 @@ public class NewsStand extends MapActivity {
             return null;
         }
     }
+    
+    public class MyAsyncTask extends AsyncTask<String, Integer, MarkerFeed> {
+
+    	protected MarkerFeed doInBackground(String... string) {
+            try {
+            	return getMarkers();
+            } catch (Exception e) {
+                Log.e(">>>>>>>>>>>> Error getting myData: ", e.getMessage(), e);
+                return null;
+            }
+
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+            // setProgressPercent(progress[0]);
+        }
+
+        protected void onPostExecute(MarkerFeed feed) {
+            //Toast.makeText(getApplicationContext(),
+            //        "Markers Downloaded.", Toast.LENGTH_SHORT)
+            //        .show();
+        	setMarkers(feed);
+        }
+    }
+
+    // Create runnable for posting
+    //final Runnable mUpdateResults = new Runnable() {
+    //    public void run() {
+    //        setMarkers();
+    //    }
+    //};
+
+    
+    public class MyTimerTask extends TimerTask {
+        public void run() {
+            try {
+                new MyAsyncTask().execute("");
+            } catch (Exception e) {
+                Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
+            }
+        }
+    }
+    
 }
