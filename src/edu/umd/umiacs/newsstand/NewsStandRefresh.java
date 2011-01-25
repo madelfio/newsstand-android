@@ -14,7 +14,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
@@ -26,20 +25,14 @@ public class NewsStandRefresh {
     private Context _ctx;
     private NewsStandMapView _mapView = null;
     private Resources _resources = null;
-    private SeekBar _slider = null;
     
-    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider) {
+    public NewsStandRefresh(Context ctx, NewsStandMapView mapView) {
         _ctx = ctx;
         _mapView = mapView; 
         _resources = ctx.getResources();
-        _slider = slider;
     }
     
     public void execute() {
-        //Toast.makeText(_ctx, "Executing refresh...",
-        //        Toast.LENGTH_SHORT).show();
-        //Toast.makeText(_ctx, "In refresh.execute()", Toast.LENGTH_SHORT).show();
-        //return;
         try {
             new RefreshTask().execute("");
         } catch (Exception e) {
@@ -99,20 +92,8 @@ public class NewsStandRefresh {
             _mapView.invalidate();
         }
 
-        _slider.setMax(feed.getMarkerCount());
     }
     
-    /*private void refreshMarkers() {
-
-        MarkerFeed feed;
-        
-        // Toast.makeText(getApplicationContext(), "Refreshing...",
-        // Toast.LENGTH_SHORT).show();
-        feed = getMarkers();
-        setMarkers(feed);
-        
-    }*/
-
     private MarkerFeed getFeed(String urlToRssFeed) {
         try {
             // set up the url

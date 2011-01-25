@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
-import android.widget.Toast;
 
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
@@ -30,15 +29,17 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
         populate();
     }
     
-    public void setNumShown(int num_to_show, Context context) {
-        Toast.makeText(context, "num_to_show: " + num_to_show, Toast.LENGTH_LONG).show();
+    public void setPctShown(int pct_to_show, Context context) {
+        int num_to_show = mOverlays.size() * pct_to_show / 100;
         for (int i=0; i < mOverlays.size(); i++) {
             OverlayItem overlay = mOverlays.get(i);
             Drawable marker = overlay.getMarker(0);
             if (i < num_to_show) {
+                marker.mutate().setAlpha(255);
                 marker.setVisible(true,true);
             }
             else {
+                marker.mutate().setAlpha(0);
                 marker.setVisible(false, true);
             }
         }

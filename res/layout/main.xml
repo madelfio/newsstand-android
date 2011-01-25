@@ -7,18 +7,18 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <Button android:id="@+id/refresh"
+        <TextView android:id="@+id/refresh"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Refresh" />
+            android:layout_height="fill_parent"
+            android:text="Number of Markers:" />
         <SeekBar 
 	        android:layout_height="wrap_content"  
 	        android:id="@+id/slider"
-	        android:layout_width="fill_parent" 
-	        android:padding="5px" 
-	        android:saveEnabled="true"  
-	        android:max="2" />
-	    
+	        android:layout_width="fill_parent"
+	        android:paddingRight="20px"
+	        android:saveEnabled="true"
+	        android:max="100" 
+	        android:progress="100"/>
 
     </LinearLayout>
     <edu.umd.umiacs.newsstand.NewsStandMapView

@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
@@ -39,15 +37,6 @@ public class NewsStand extends MapActivity {
         refresh = new NewsStandRefresh(this, mapView, slider);
         mapView.setRefresh(refresh);
 
-
-        Button refreshButton = (Button) findViewById(R.id.refresh);
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                refresh.execute();
-            }
-        });
-        
         slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
@@ -55,11 +44,8 @@ public class NewsStand extends MapActivity {
                     boolean fromUser) {
                 List<Overlay> mapOverlays = mapView.getOverlays();
                 NewsStandItemizedOverlay o = (NewsStandItemizedOverlay) mapOverlays.get(0);
-                o.setNumShown(progress, getApplicationContext());
+                o.setPctShown(progress, getApplicationContext());
                 mapView.invalidate();
-                //Toast.makeText(getApplicationContext(), 
-                //        "My SeekBar = " + seekBar.getId() + ", Progress = " + progress, Toast.LENGTH_LONG)
-                //        .show();
             }
 
             @Override
@@ -71,8 +57,6 @@ public class NewsStand extends MapActivity {
                 
             }
         });
-
-        //refresh.execute();
     }
 
     @Override
