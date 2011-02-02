@@ -15,8 +15,8 @@ import com.google.android.maps.Overlay;
 
 public class NewsStand extends MapActivity {
     private NewsStandMapView mapView = null;
-    private SeekBar slider = null;
     private NewsStandRefresh refresh = null;
+    private SeekBar slider = null;
 
     @Override
     protected boolean isRouteDisplayed() {
@@ -29,19 +29,27 @@ public class NewsStand extends MapActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        initMapView();
+        initRefresh();
+        initSlider();
+        mapView.setRefresh(refresh);
+    }
+
+    private void initMapView() {
         mapView = (NewsStandMapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
-        
-        slider = (SeekBar) findViewById(R.id.slider);
+    }
 
+    private void initRefresh() {
         refresh = new NewsStandRefresh(this, mapView);
-        mapView.setRefresh(refresh);
-
+    }
+    
+    private void initSlider() {
+        slider = (SeekBar) findViewById(R.id.slider);
         slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                    boolean fromUser) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 List<Overlay> mapOverlays = mapView.getOverlays();
                 NewsStandItemizedOverlay o = (NewsStandItemizedOverlay) mapOverlays.get(0);
                 o.setPctShown(progress, getApplicationContext());
@@ -49,16 +57,13 @@ public class NewsStand extends MapActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

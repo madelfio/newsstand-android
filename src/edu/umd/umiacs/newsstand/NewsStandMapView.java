@@ -20,11 +20,27 @@ public class NewsStandMapView extends MapView {
     public NewsStandMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         ctx = context;
-        updateMapWindow();
     }
 
     public void setRefresh(NewsStandRefresh refresh_instance) {
         refresh = refresh_instance;
+        GeoPoint centerpoint = getMapCenter();
+        int lat_span = getLatitudeSpan();
+        int lon_span = getLongitudeSpan();
+
+        int lat_l = centerpoint.getLatitudeE6() - (lat_span / 2);
+        int lat_h = lat_l + lat_span;
+        int lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
+        int lon_h = lon_l + lon_span;
+        
+        Toast.makeText(ctx,
+                       "lat: " + lat_l/1E6 + " - " + lat_h/1E6 + ", lon: " + lon_l/1E6 + " - " + lon_h/1E6, 
+                       Toast.LENGTH_SHORT)
+                       .show();
+        //Toast.makeText(ctx, "Should refresh now...", Toast.LENGTH_SHORT).show();
+
+
+        updateMapWindow();
     }
     
     @Override
