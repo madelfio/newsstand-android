@@ -34,7 +34,7 @@ public class NewsStand extends MapActivity {
         
         slider = (SeekBar) findViewById(R.id.slider);
 
-        refresh = new NewsStandRefresh(this, mapView, slider);
+        refresh = new NewsStandRefresh(this, mapView);
         mapView.setRefresh(refresh);
 
         slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
