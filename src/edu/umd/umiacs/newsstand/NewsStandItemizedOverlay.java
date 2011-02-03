@@ -15,15 +15,12 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
     private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
     private Context mContext;
 
-    public NewsStandItemizedOverlay(Drawable defaultMarker) {
-        super(boundCenterBottom(defaultMarker));
-    }
-
     public NewsStandItemizedOverlay(Drawable defaultMarker, Context context) {
         super(boundCenterBottom(defaultMarker));
         mContext = context;
     }
-    
+
+    // append new overlay object to mOverlays array
     public void addOverlay(OverlayItem overlay) {
         mOverlays.add(overlay);
         populate();
@@ -65,6 +62,12 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
     @Override
     protected boolean onTap(int index) {
       OverlayItem item = mOverlays.get(index);
+      Drawable marker = item.getMarker(0);
+      
+      if (!marker.isVisible()) {
+          return true;
+      }
+      
       AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
       dialog.setTitle(item.getTitle());
       dialog.setMessage(Html.fromHtml(item.getSnippet()));
