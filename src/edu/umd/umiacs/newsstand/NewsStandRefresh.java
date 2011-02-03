@@ -25,6 +25,7 @@ public class NewsStandRefresh {
     private Context _ctx;
     private NewsStandMapView _mapView = null;
     private Resources _resources = null;
+    private int num_executing = 0;
     
     public NewsStandRefresh(Context ctx, NewsStandMapView mapView) {
         _ctx = ctx;
@@ -34,7 +35,10 @@ public class NewsStandRefresh {
     
     public void execute() {
         try {
-            new RefreshTask().execute("");
+            if (num_executing < 3) {
+                num_executing++;
+                new RefreshTask().execute("");
+            }
         } catch (Exception e) {
             Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
         }        
@@ -141,11 +145,9 @@ public class NewsStandRefresh {
         }
 
         protected void onPostExecute(MarkerFeed feed) {
-            //Toast.makeText(_ctx,
-            //        "Markers Downloaded.", Toast.LENGTH_SHORT)
-            //        .show();
             if (feed != null) {
                 setMarkers(feed);
+                num_executing--;
             }
         }
     }
