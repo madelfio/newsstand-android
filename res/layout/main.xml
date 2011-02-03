@@ -15,10 +15,10 @@
 	        android:layout_height="wrap_content"  
 	        android:id="@+id/slider"
 	        android:layout_width="fill_parent"
-	        android:paddingRight="20px"
+	        android:paddingRight="40px"
 	        android:saveEnabled="true"
 	        android:max="100" 
-	        android:progress="100"/>
+	        android:progress="50"/>
     </LinearLayout>
     <edu.umd.umiacs.newsstand.NewsStandMapView
         android:id="@+id/mapview"

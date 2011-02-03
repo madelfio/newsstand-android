@@ -15,8 +15,8 @@ import com.google.android.maps.Overlay;
 
 public class NewsStand extends MapActivity {
     private NewsStandMapView mapView = null;
-    private NewsStandRefresh refresh = null;
     private SeekBar slider = null;
+    private NewsStandRefresh refresh = null;
 
     @Override
     protected boolean isRouteDisplayed() {
@@ -30,20 +30,23 @@ public class NewsStand extends MapActivity {
         setContentView(R.layout.main);
 
         initMapView();
-        initRefresh();
         initSlider();
+        initRefresh();
         mapView.setRefresh(refresh);
     }
 
-    private void initMapView() {
-        mapView = (NewsStandMapView) findViewById(R.id.mapview);
-        mapView.setBuiltInZoomControls(true);
-    }
-
-    private void initRefresh() {
-        refresh = new NewsStandRefresh(this, mapView);
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.clearSavedLocation();
+        mapView.updateMapWindow();
     }
     
+    private void initMapView() {
+        mapView = (NewsStandMapView) findViewById(R.id.mapview);
+        mapView.setBuiltInZoomControls(false);
+    }
+
     private void initSlider() {
         slider = (SeekBar) findViewById(R.id.slider);
         slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -62,6 +65,10 @@ public class NewsStand extends MapActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
+    }
+
+    private void initRefresh() {
+        refresh = new NewsStandRefresh(this, mapView, slider);
     }
     
     @Override

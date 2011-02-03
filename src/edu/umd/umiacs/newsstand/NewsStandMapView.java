@@ -22,25 +22,15 @@ public class NewsStandMapView extends MapView {
         ctx = context;
     }
 
+    public void clearSavedLocation() {
+        lat_low = 0;
+        lat_high = 0;
+        lon_low = 0;
+        lon_high = 0;
+    }
+    
     public void setRefresh(NewsStandRefresh refresh_instance) {
         refresh = refresh_instance;
-        GeoPoint centerpoint = getMapCenter();
-        int lat_span = getLatitudeSpan();
-        int lon_span = getLongitudeSpan();
-
-        int lat_l = centerpoint.getLatitudeE6() - (lat_span / 2);
-        int lat_h = lat_l + lat_span;
-        int lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
-        int lon_h = lon_l + lon_span;
-        
-        Toast.makeText(ctx,
-                       "lat: " + lat_l/1E6 + " - " + lat_h/1E6 + ", lon: " + lon_l/1E6 + " - " + lon_h/1E6, 
-                       Toast.LENGTH_SHORT)
-                       .show();
-        //Toast.makeText(ctx, "Should refresh now...", Toast.LENGTH_SHORT).show();
-
-
-        updateMapWindow();
     }
     
     @Override
@@ -90,13 +80,8 @@ public class NewsStandMapView extends MapView {
             lat_high = lat_h;
             lon_low = lon_l;
             lon_high = lon_h;
-            //Toast.makeText(ctx,
-            //        "lat: " + lat_low/1E6 + " - " + lat_high/1E6 + ", lon: " + lon_low/1E6 + " - " + lon_high/1E6, 
-            //        Toast.LENGTH_SHORT)
-            //        .show();
-            //Toast.makeText(ctx, "Should refresh now...", Toast.LENGTH_SHORT).show();
             if (refresh == null) {
-                Toast.makeText(ctx, "'refresh' object is null!  Can't refresh", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "Refresh object is null.  Can't refresh", Toast.LENGTH_SHORT).show();
             } else {
                 refresh.execute();
             }

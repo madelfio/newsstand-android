@@ -45,9 +45,9 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
     // method added to allow passing a drawable "marker" to use for the item
     // this must be done within the class because boundCenterBottom is protected
     public void addOverlay(OverlayItem overlay, Drawable marker) {
-        marker.setBounds(-marker.getIntrinsicWidth() / 4,
-               -marker.getIntrinsicHeight() / 2, 
-               marker.getIntrinsicWidth() / 4,
+        marker.setBounds(-marker.getIntrinsicWidth() / 3,
+               -marker.getIntrinsicHeight() * 2 / 3, 
+               marker.getIntrinsicWidth() / 3,
                 0);
         overlay.setMarker(marker);
         //overlay.setMarker(boundCenterBottom(marker));

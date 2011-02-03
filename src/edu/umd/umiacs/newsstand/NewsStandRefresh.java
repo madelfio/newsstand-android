@@ -14,6 +14,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
@@ -24,21 +25,23 @@ public class NewsStandRefresh {
     
     private Context _ctx;
     private NewsStandMapView _mapView = null;
+    private SeekBar _slider = null;
     private Resources _resources = null;
     private int num_executing = 0;
     
-    public NewsStandRefresh(Context ctx, NewsStandMapView mapView) {
+    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider) {
         _ctx = ctx;
         _mapView = mapView; 
+        _slider = slider;
         _resources = ctx.getResources();
     }
     
     public void execute() {
         try {
-            if (num_executing < 3) {
+            if (num_executing < 2) {
                 num_executing++;
                 new RefreshTask().execute("");
-            }
+            } 
         } catch (Exception e) {
             Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
         }        
@@ -46,20 +49,18 @@ public class NewsStandRefresh {
     
     private MarkerFeed getMarkers() {
         // get map coordinates
-        _mapView.updateMapWindow();
-        
         String marker_url = "http://newsstand.umiacs.umd.edu/news/xml_map?lat_low=%f&lat_high=%f&lon_low=%f&lon_high=%f";
         marker_url = String
                 .format(marker_url, 
                         _mapView.lat_low / 1E6, _mapView.lat_high / 1E6,
                         _mapView.lon_low / 1E6, _mapView.lon_high / 1E6);
+        Log.i("NewsStand", "marker_url[" + marker_url + "]");
 
         return getFeed(marker_url);
     }
     
     private void setMarkers(MarkerFeed feed) {
         List<Overlay> mapOverlays = _mapView.getOverlays();
-        mapOverlays.clear();
         Drawable drawable = _resources.getDrawable(
                 R.drawable.marker_general);
         NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
@@ -92,10 +93,11 @@ public class NewsStandRefresh {
             itemizedoverlay.addOverlay(overlayitem, _resources.getDrawable(my_marker));
         }
         if (feed.getMarkerCount() > 0) {
+            itemizedoverlay.setPctShown(_slider.getProgress(), _ctx);
+            mapOverlays.clear();
             mapOverlays.add(itemizedoverlay);
             _mapView.invalidate();
         }
-
     }
     
     private MarkerFeed getFeed(String urlToRssFeed) {
@@ -148,7 +150,10 @@ public class NewsStandRefresh {
             if (feed != null) {
                 setMarkers(feed);
                 num_executing--;
+            } else {
+                Toast.makeText(_ctx, "Null marker feed...", Toast.LENGTH_SHORT).show();
             }
+            
         }
     }
 }
