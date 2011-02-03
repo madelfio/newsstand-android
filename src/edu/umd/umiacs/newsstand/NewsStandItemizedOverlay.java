@@ -45,7 +45,12 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
     // method added to allow passing a drawable "marker" to use for the item
     // this must be done within the class because boundCenterBottom is protected
     public void addOverlay(OverlayItem overlay, Drawable marker) {
-        overlay.setMarker(boundCenterBottom(marker));
+        marker.setBounds(-marker.getIntrinsicWidth() / 4,
+               -marker.getIntrinsicHeight() / 2, 
+               marker.getIntrinsicWidth() / 4,
+                0);
+        overlay.setMarker(marker);
+        //overlay.setMarker(boundCenterBottom(marker));
         addOverlay(overlay);
     }
     
@@ -61,17 +66,17 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
     @Override
     protected boolean onTap(int index) {
-      OverlayItem item = mOverlays.get(index);
-      Drawable marker = item.getMarker(0);
-      
-      if (!marker.isVisible()) {
-          return true;
-      }
-      
-      AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-      dialog.setTitle(item.getTitle());
-      dialog.setMessage(Html.fromHtml(item.getSnippet()));
-      dialog.show();
-      return true;
+        OverlayItem item = mOverlays.get(index);
+        Drawable marker = item.getMarker(0);
+        
+        if (!marker.isVisible()) {
+            return true;
+        }
+        
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+        dialog.setTitle(item.getTitle());
+        dialog.setMessage(Html.fromHtml(item.getSnippet()));
+        dialog.show();
+        return true;
     }
 }
