@@ -31,6 +31,8 @@ public class NewsStandRefresh {
     private Resources _resources = null;
     private int m_num_executing = 0;
     private Lock l = new ReentrantLock();
+    public int m_show_idx = 0;
+    public int m_ajax_idx = 0;
     
     public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider) {
         _ctx = ctx;
@@ -41,13 +43,13 @@ public class NewsStandRefresh {
     
     public void execute() {
         try {
-            if (m_num_executing < 2) {
+            if (m_num_executing < 3) {
                 m_num_executing++;
                 new RefreshTask().execute("");
             } 
         } catch (Exception e) {
             Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
-        }        
+        }
     }
     
     private MarkerFeed getMarkers() {
@@ -142,8 +144,12 @@ public class NewsStandRefresh {
 
     public class RefreshTask extends AsyncTask<String, Integer, MarkerFeed> {
 
+        private int refresh_idx;
+
         protected MarkerFeed doInBackground(String... string) {
             try {
+                m_ajax_idx++;
+                refresh_idx = m_ajax_idx;
                 return getMarkers();
             } catch (Exception e) {
                 Log.e(">>>>>>>>>>>> Error getting myData: ", e.getMessage(), e);
@@ -157,12 +163,14 @@ public class NewsStandRefresh {
 
         protected void onPostExecute(MarkerFeed feed) {
             if (feed != null) {
-                setMarkers(feed);
+                if (refresh_idx > m_show_idx) {
+                    m_show_idx = refresh_idx;
+                    setMarkers(feed);
+                }
                 m_num_executing--;
             } else {
                 Toast.makeText(_ctx, "Null marker feed...", Toast.LENGTH_SHORT).show();
             }
-            
         }
     }
 }
