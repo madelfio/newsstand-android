@@ -12,3 +12,6 @@
 bin/**
 .settings/**
 .classpath
+
+# VIM files
+*.swp
