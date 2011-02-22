@@ -31,7 +31,7 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
         for (int i=0; i < mOverlays.size(); i++) {
             OverlayItem overlay = mOverlays.get(i);
             Drawable marker = overlay.getMarker(0);
-            if (i < num_to_show) {
+            if (i < num_to_show + 1) {
                 marker.mutate().setAlpha(255);
                 marker.setVisible(true,true);
             }
