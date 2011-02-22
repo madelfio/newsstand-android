@@ -2,6 +2,8 @@ package edu.umd.umiacs.newsstand;
 
 import java.util.List;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +18,7 @@ import com.google.android.maps.Overlay;
 public class NewsStand extends MapActivity {
     private NewsStandMapView mapView = null;
     private SeekBar slider = null;
-    private NewsStandRefresh refresh = null;
+    private NewsStandRefresh refresh = null; 
 
     @Override
     protected boolean isRouteDisplayed() {
@@ -30,16 +32,31 @@ public class NewsStand extends MapActivity {
         setContentView(R.layout.main);
 
         initMapView();
+        handleIntent(getIntent());
         initSlider();
         initRefresh();
         mapView.setRefresh(refresh);
+        mapView.updateMapWindowForce();
     }
 
     @Override
+    public void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+    
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            mapView.addSearch(query);
+        }
+    }
+    
+    @Override
     public void onResume() {
         super.onResume();
-        mapView.clearSavedLocation();
-        mapView.updateMapWindow();
+        refresh.clearSavedLocation();
+        mapView.updateMapWindowForce();
     }
     
     private void initMapView() {
@@ -82,6 +99,8 @@ public class NewsStand extends MapActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.search:
+            onSearchRequested();
+            break;
         case R.id.locate:
         case R.id.settings:
         case R.id.sources:

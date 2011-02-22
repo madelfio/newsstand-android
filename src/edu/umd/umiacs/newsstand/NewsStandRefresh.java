@@ -33,6 +33,12 @@ public class NewsStandRefresh {
     private Lock l = new ReentrantLock();
     public int m_show_idx = 0;
     public int m_ajax_idx = 0;
+
+    public int m_lat_l = 0;
+    public int m_lat_h = 0;
+    public int m_lon_l = 0;
+    public int m_lon_h = 0;
+
     
     public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider) {
         _ctx = ctx;
@@ -44,12 +50,52 @@ public class NewsStandRefresh {
     public void execute() {
         try {
             if (m_num_executing < 3) {
-                m_num_executing++;
-                new RefreshTask().execute("");
+                if (curBoundsDiffer()) {
+                    updateBounds();
+                    m_num_executing++;
+                    new RefreshTask().execute("");
+                }
             } 
         } catch (Exception e) {
             Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
         }
+    }
+    
+    public void executeForce() {
+        updateBounds();
+        m_num_executing++;
+        new RefreshTask().execute("");
+    }
+    
+    public void clearSavedLocation() {
+        m_lat_l = 0;
+        m_lat_h = 0;
+        m_lon_l = 0;
+        m_lon_h = 0;
+    }
+    
+    private boolean curBoundsDiffer() {
+        GeoPoint centerpoint = _mapView.getMapCenter();
+        int lat_span = _mapView.getLatitudeSpan();
+        int lon_span = _mapView.getLongitudeSpan();
+
+        int lat_l = centerpoint.getLatitudeE6() - (lat_span / 2);
+        int lat_h = lat_l + lat_span;
+        int lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
+        int lon_h = lon_l + lon_span;
+        
+        return (lat_l != m_lat_l || lat_h != m_lat_h || lon_l != m_lon_l || lon_h != m_lon_h);
+    }
+
+    private void updateBounds() {
+        GeoPoint centerpoint = _mapView.getMapCenter();
+        int lat_span = _mapView.getLatitudeSpan();
+        int lon_span = _mapView.getLongitudeSpan();
+
+        m_lat_l = centerpoint.getLatitudeE6() - (lat_span / 2);
+        m_lat_h = m_lat_l + lat_span;
+        m_lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
+        m_lon_h = m_lon_l + lon_span;
     }
     
     private MarkerFeed getMarkers() {
@@ -57,8 +103,13 @@ public class NewsStandRefresh {
         String marker_url = "http://newsstand.umiacs.umd.edu/news/xml_map?lat_low=%f&lat_high=%f&lon_low=%f&lon_high=%f";
         marker_url = String
                 .format(marker_url, 
-                        _mapView.lat_low / 1E6, _mapView.lat_high / 1E6,
-                        _mapView.lon_low / 1E6, _mapView.lon_high / 1E6);
+                        m_lat_l / 1E6, m_lat_h / 1E6,
+                        m_lon_l / 1E6, m_lon_h / 1E6);
+        
+        if (_mapView.current_search != null && _mapView.current_search != "") {
+            marker_url += String.format("&search=%s", _mapView.current_search);
+        }
+        
         Log.i("NewsStand", "marker_url[" + marker_url + "]");
 
         return getFeed(marker_url);

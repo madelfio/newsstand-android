@@ -5,30 +5,19 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
-import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 
 public class NewsStandMapView extends MapView {
     private long lastTouchTime = -1;
     private NewsStandRefresh refresh;
     Context ctx = null;
-    public int lat_low = 0;
-    public int lat_high = 0;
-    public int lon_low = 0;
-    public int lon_high = 0;
+    public String current_search = null;
 
     public NewsStandMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         ctx = context;
     }
 
-    public void clearSavedLocation() {
-        lat_low = 0;
-        lat_high = 0;
-        lon_low = 0;
-        lon_high = 0;
-    }
-    
     public void setRefresh(NewsStandRefresh refresh_instance) {
         refresh = refresh_instance;
     }
@@ -66,25 +55,29 @@ public class NewsStandMapView extends MapView {
     }
 
     public void updateMapWindow() {
-        GeoPoint centerpoint = getMapCenter();
-        int lat_span = getLatitudeSpan();
-        int lon_span = getLongitudeSpan();
-
-        int lat_l = centerpoint.getLatitudeE6() - (lat_span / 2);
-        int lat_h = lat_l + lat_span;
-        int lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
-        int lon_h = lon_l + lon_span;
-        
-        if (lat_l != lat_low || lat_h != lat_high || lon_l != lon_low || lon_h != lon_high) {
-            lat_low = lat_l;
-            lat_high = lat_h;
-            lon_low = lon_l;
-            lon_high = lon_h;
-            if (refresh == null) {
-                Toast.makeText(ctx, "Refresh object is null.  Can't refresh", Toast.LENGTH_SHORT).show();
-            } else {
-                refresh.execute();
-            }
+        if (refresh == null) {
+            Toast.makeText(ctx, "Refresh object is null.  Can't refresh", Toast.LENGTH_SHORT).show();
+        } else {
+            refresh.execute();
         }
+    }
+    
+    public void updateMapWindowForce() {
+        if (refresh == null) {
+            Toast.makeText(ctx, "Refresh object is null.  Can't refresh", Toast.LENGTH_SHORT).show();
+        } else {
+            refresh.executeForce();
+        }        
+    }
+    
+    public void addSearch(String query) {
+        current_search = query;
+        Toast.makeText(ctx,"Searching for: " + query, Toast.LENGTH_SHORT).show();
+        updateMapWindowForce();
+    }
+    
+    public void clearSearch() {
+        current_search = null;
+        Toast.makeText(ctx, "Search has been cleared", Toast.LENGTH_SHORT).show();
     }
 }
