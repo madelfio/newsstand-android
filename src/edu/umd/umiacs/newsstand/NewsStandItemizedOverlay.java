@@ -11,13 +11,14 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
 public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
-
     private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
     private Context mContext;
-
-    public NewsStandItemizedOverlay(Drawable defaultMarker, Context context) {
+    private NewsStandMapPopupPanel mPanel;
+    
+    public NewsStandItemizedOverlay(Drawable defaultMarker, Context context, NewsStandMapPopupPanel panel) {
         super(boundCenterBottom(defaultMarker));
         mContext = context;
+        mPanel = panel;
     }
 
     // append new overlay object to mOverlays array
@@ -50,7 +51,6 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
                marker.getIntrinsicWidth() / 3,
                 0);
         overlay.setMarker(marker);
-        //overlay.setMarker(boundCenterBottom(marker));
         addOverlay(overlay);
     }
     
@@ -72,6 +72,8 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
         if (!marker.isVisible()) {
             return true;
         }
+
+        //mPanel.display(item.getPoint(), item.getTitle(), item.getSnippet());
         
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
         dialog.setTitle(item.getTitle());
@@ -79,4 +81,5 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
         dialog.show();
         return true;
     }
+    
 }

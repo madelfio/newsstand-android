@@ -18,7 +18,8 @@ import com.google.android.maps.Overlay;
 public class NewsStand extends MapActivity {
     private NewsStandMapView mapView = null;
     private SeekBar slider = null;
-    private NewsStandRefresh refresh = null; 
+    private NewsStandMapPopupPanel popup_panel = null;
+    private NewsStandRefresh refresh = null;
 
     @Override
     protected boolean isRouteDisplayed() {
@@ -34,6 +35,7 @@ public class NewsStand extends MapActivity {
         initMapView();
         handleIntent(getIntent());
         initSlider();
+        initPopupPanel();
         initRefresh();
         mapView.setRefresh(refresh);
         mapView.updateMapWindowForce();
@@ -83,9 +85,13 @@ public class NewsStand extends MapActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
     }
+    
+    private void initPopupPanel() {
+        popup_panel = new NewsStandMapPopupPanel(this, R.layout.map_popup, mapView);
+    }
 
     private void initRefresh() {
-        refresh = new NewsStandRefresh(this, mapView, slider);
+        refresh = new NewsStandRefresh(this, mapView, slider, popup_panel);
     }
     
     @Override

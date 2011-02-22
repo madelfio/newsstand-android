@@ -28,6 +28,7 @@ public class NewsStandRefresh {
     private Context _ctx;
     private NewsStandMapView _mapView = null;
     private SeekBar _slider = null;
+    private NewsStandMapPopupPanel _popup_panel = null;
     private Resources _resources = null;
     private int m_num_executing = 0;
     private Lock l = new ReentrantLock();
@@ -40,10 +41,11 @@ public class NewsStandRefresh {
     public int m_lon_h = 0;
 
     
-    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider) {
+    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider, NewsStandMapPopupPanel popup_panel) {
         _ctx = ctx;
         _mapView = mapView; 
         _slider = slider;
+        _popup_panel = popup_panel;
         _resources = ctx.getResources();
     }
     
@@ -122,7 +124,7 @@ public class NewsStandRefresh {
             Drawable drawable = _resources.getDrawable(
                     R.drawable.marker_general);
             NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
-                    drawable, _ctx);
+                    drawable, _ctx, _popup_panel);
             for (int i = 0; i < feed.getMarkerCount(); i++) {
                 MarkerInfo cur_marker = feed.getMarker(i);
                 GeoPoint point = new GeoPoint(
