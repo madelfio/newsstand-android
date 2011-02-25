@@ -73,9 +73,11 @@ public class NewsStand extends MapActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 List<Overlay> mapOverlays = mapView.getOverlays();
-                NewsStandItemizedOverlay o = (NewsStandItemizedOverlay) mapOverlays.get(0);
-                o.setPctShown(progress, getApplicationContext());
-                mapView.invalidate();
+                if (mapOverlays.size() > 0) {
+                    NewsStandItemizedOverlay o = (NewsStandItemizedOverlay) mapOverlays.get(0);
+                    o.setPctShown(progress, getApplicationContext());
+                    mapView.invalidate();
+                }
             }
 
             @Override
@@ -109,6 +111,9 @@ public class NewsStand extends MapActivity {
             break;
         case R.id.locate:
         case R.id.settings:
+            Intent i = new Intent(this, Preferences.class);
+            startActivity(i);
+            break;
         case R.id.sources:
         case R.id.home:
         case R.id.top_stories:

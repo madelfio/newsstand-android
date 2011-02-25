@@ -20,6 +20,7 @@
                        android:resource="@xml/searchable"/>
             
         </activity>
+        <activity android:name=".Preferences" />
     </application>
     
     <uses-sdk android:minSdkVersion="8" />
