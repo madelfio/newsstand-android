@@ -12,6 +12,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -30,6 +31,7 @@ public class NewsStandRefresh {
     private SeekBar _slider = null;
     private NewsStandMapPopupPanel _popup_panel = null;
     private Resources _resources = null;
+    private SharedPreferences _prefs;
     private int m_num_executing = 0;
     private Lock l = new ReentrantLock();
     public int m_show_idx = 0;
@@ -41,12 +43,13 @@ public class NewsStandRefresh {
     public int m_lon_h = 0;
 
     
-    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider, NewsStandMapPopupPanel popup_panel) {
+    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider, NewsStandMapPopupPanel popup_panel, SharedPreferences prefs) {
         _ctx = ctx;
         _mapView = mapView; 
         _slider = slider;
         _popup_panel = popup_panel;
         _resources = ctx.getResources();
+        _prefs = prefs;
     }
     
     public void execute() {
@@ -110,6 +113,11 @@ public class NewsStandRefresh {
         
         if (_mapView.current_search != null && _mapView.current_search != "") {
             marker_url += String.format("&search=%s", _mapView.current_search);
+        }
+        
+        // TODO: do something with prefs here!!!
+        String layer_id = _prefs.getString("layers", null);
+        if (layer_id.length() > 0) {
         }
         
         Log.i("NewsStand", "marker_url[" + marker_url + "]");

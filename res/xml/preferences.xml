@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-  <EditTextPreference android:title="User Name"
-                      android:key="username"
-                      android:summary="Please provide user name">
-  </EditTextPreference>
+  <PreferenceCategory android:title="Layers">
+    <ListPreference android:title="Select Layer"
+                    android:key="layer"
+                    android:summary="Select the type of visible layer to display"
+                    android:entries="@array/layers"
+                    android:entryValues="@array/layerValues"
+                    android:defaultValue="1" />
+    
+  </PreferenceCategory>
+  <PreferenceCategory android:title="Topics">
+    <CheckBoxPreference android:title="All Topics"
+                        android:key="all_topics" 
+                        android:defaultValue="true"
+                        />
+    <CheckBoxPreference android:title="General"
+                        android:key="general_topics" 
+                        android:defaultValue="false"
+                        />
+    <CheckBoxPreference android:title="Business"
+                        android:key="business_topics" 
+                        android:defaultValue="false"
+                        />
+    <CheckBoxPreference android:title="SciTech"
+                        android:key="scitech_topics" 
+                        android:defaultValue="false"
+                        />
+    <CheckBoxPreference android:title="Entertainment"
+                        android:key="entertainment_topics" 
+                        android:defaultValue="false"
+                        />
+    <CheckBoxPreference android:title="Health"
+                        android:key="health_topics" 
+                        android:defaultValue="false"
+                        />
+    <CheckBoxPreference android:title="Sports"
+                        android:key="sports_topics" 
+                        android:defaultValue="false"
+                        />
+  </PreferenceCategory>
+  <PreferenceCategory android:title="Media Filters">
+    <ListPreference android:title="Filter Images" 
+                    android:key="images"
+                    android:summary="Select number of images to display"
+                    android:entries="@array/images"
+                    android:entryValues="@array/imageValues" 
+                    android:defaultValue="0" />
+    <ListPreference android:title="Filter Videos" 
+                    android:key="videos"
+                    android:summary="Select number of videos to display"
+                    android:entries="@array/videos"
+                    android:entryValues="@array/videoValues" 
+                    android:defaultValue="0" />
+  </PreferenceCategory>
 </PreferenceScreen>

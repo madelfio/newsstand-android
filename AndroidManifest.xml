@@ -20,7 +20,7 @@
                        android:resource="@xml/searchable"/>
             
         </activity>
-        <activity android:name=".Preferences" />
+        <activity android:name=".NewsStandPreferences" />
     </application>
     
     <uses-sdk android:minSdkVersion="8" />

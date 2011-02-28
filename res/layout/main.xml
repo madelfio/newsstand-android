@@ -10,9 +10,10 @@
         <TextView android:id="@+id/refresh"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:layout_marginTop="6px"
             android:text="Number of Markers:" />
         <SeekBar 
-	        android:layout_height="wrap_content"  
+	        android:layout_height="fill_parent"  
 	        android:id="@+id/slider"
 	        android:layout_width="fill_parent"
 	        android:paddingRight="40px"

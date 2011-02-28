@@ -13,12 +13,12 @@ import com.google.android.maps.OverlayItem;
 public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
     private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
     private Context mContext;
-    private NewsStandMapPopupPanel mPanel;
+    //private NewsStandMapPopupPanel mPanel;
     
     public NewsStandItemizedOverlay(Drawable defaultMarker, Context context, NewsStandMapPopupPanel panel) {
         super(boundCenterBottom(defaultMarker));
         mContext = context;
-        mPanel = panel;
+        //mPanel = panel;
     }
 
     // append new overlay object to mOverlays array
