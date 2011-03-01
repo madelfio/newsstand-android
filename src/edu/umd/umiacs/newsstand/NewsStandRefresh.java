@@ -60,7 +60,6 @@ public class NewsStandRefresh implements Runnable {
             if (m_num_executing < 3) {
                 if (curBoundsDiffer()) {
                     updateBounds();
-                    m_num_executing++;
                     new RefreshTask().execute("");
                 }
             } 
@@ -119,8 +118,11 @@ public class NewsStandRefresh implements Runnable {
             marker_url += String.format("&search=%s", _mapView.current_search);
         }
         
+        marker_url += topicQuery();
+        
         // TODO: do something with prefs here!!!
         // TODO: fix below... causes exception
+
         //String layer_id = _prefs.getString("layers", null);
         //if (layer_id.length() > 0) {
         //    Toast.makeText(_ctx, "layer_id: " + layer_id, Toast.LENGTH_SHORT).show();
@@ -131,6 +133,37 @@ public class NewsStandRefresh implements Runnable {
         //        Toast.LENGTH_SHORT).show();
 
         return getFeed(marker_url);
+    }
+
+    private String topicQuery() {
+        if (_prefs.getBoolean("all_topics", false)) {
+            // add nothing to query string if showing all topics
+        }
+        else {
+            String topics = "";
+            if (_prefs.getBoolean("general_topics", false)) {
+                topics += "'General',";
+            }
+            if (_prefs.getBoolean("business_topics", false)) {
+                topics += "'Business',";
+            }
+            if (_prefs.getBoolean("scitech_topics", false)) {
+                topics += "'SciTech',";
+            }
+            if (_prefs.getBoolean("entertainment_topics", false)) {
+                topics += "'Entertainment',"; 
+            }
+            if (_prefs.getBoolean("health_topics", false)) {
+                topics += "'Health',";
+            }
+            if (_prefs.getBoolean("sports_topics", false)) {
+                topics += "'Sports',";
+            }
+            if (topics.length() > 0) {
+                return String.format("&cat=(%s)", topics.substring(0, topics.length()-1));
+            }
+        }
+        return "";
     }
     
     private void setMarkers(MarkerFeed feed) {
@@ -221,6 +254,8 @@ public class NewsStandRefresh implements Runnable {
 
         protected MarkerFeed doInBackground(String... string) {
             //try {
+
+                m_num_executing++;
                 m_ajax_idx++;
                 refresh_idx = m_ajax_idx;
                 return getMarkers();
@@ -239,6 +274,7 @@ public class NewsStandRefresh implements Runnable {
                 if (refresh_idx > m_show_idx) {
                     m_show_idx = refresh_idx;
                     setMarkers(feed);
+                    //Toast.makeText(_ctx, "Topic Query: " + topicQuery(), Toast.LENGTH_SHORT).show();
                 }
                 m_num_executing--;
             } else {
