@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,7 +51,9 @@ public class NewsStand extends MapActivity {
         // initialize Refresh processing and call it
         initRefresh();
         mapView.setRefresh(refresh);
-        mapView.updateMapWindowForce();
+        
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(refresh, 1000);
     }
 
     /** load default or saved prefs into prefs object **/

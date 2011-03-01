@@ -16,7 +16,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -24,7 +23,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
-public class NewsStandRefresh {
+public class NewsStandRefresh implements Runnable {
     
     private Context _ctx;
     private NewsStandMapView _mapView = null;
@@ -50,6 +49,10 @@ public class NewsStandRefresh {
         _popup_panel = popup_panel;
         _resources = ctx.getResources();
         _prefs = prefs;
+    }
+    
+    public void run() {
+    	executeForce();
     }
     
     public void execute() {
