@@ -4,8 +4,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.util.Log;
-
 public class MarkerFeedHandler extends DefaultHandler {
     
     MarkerFeed _feed;
@@ -149,7 +147,7 @@ public class MarkerFeedHandler extends DefaultHandler {
     public void characters(char ch[], int start, int length)
     {
         String theString = new String(ch,start,length);
-        Log.i("NewsStand","characters[" + theString + "]");
+        //Log.i("NewsStand","characters[" + theString + "]");
         
         switch (currentstate)
         {

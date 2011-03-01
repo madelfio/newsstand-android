@@ -53,7 +53,7 @@ public class NewsStandRefresh {
     }
     
     public void execute() {
-        try {
+        //try {
             if (m_num_executing < 3) {
                 if (curBoundsDiffer()) {
                     updateBounds();
@@ -61,9 +61,9 @@ public class NewsStandRefresh {
                     new RefreshTask().execute("");
                 }
             } 
-        } catch (Exception e) {
-            Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
-        }
+        //} catch (Exception e) {
+        //    Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
+        //}
     }
     
     public void executeForce() {
@@ -112,22 +112,27 @@ public class NewsStandRefresh {
                         m_lon_l / 1E6, m_lon_h / 1E6);
         
         if (_mapView.current_search != null && _mapView.current_search != "") {
+            
             marker_url += String.format("&search=%s", _mapView.current_search);
         }
         
         // TODO: do something with prefs here!!!
-        String layer_id = _prefs.getString("layers", null);
-        if (layer_id.length() > 0) {
-        }
+        // TODO: fix below... causes exception
+        //String layer_id = _prefs.getString("layers", null);
+        //if (layer_id.length() > 0) {
+        //    Toast.makeText(_ctx, "layer_id: " + layer_id, Toast.LENGTH_SHORT).show();
+        //}
         
-        Log.i("NewsStand", "marker_url[" + marker_url + "]");
+        //Log.i("NewsStand", "marker_url[" + marker_url + "]");
+        //Toast.makeText(_ctx, "URL: " + marker_url,
+        //        Toast.LENGTH_SHORT).show();
 
         return getFeed(marker_url);
     }
     
     private void setMarkers(MarkerFeed feed) {
         l.lock();
-        try {
+        //try {
             List<Overlay> mapOverlays = _mapView.getOverlays();
             Drawable drawable = _resources.getDrawable(
                     R.drawable.marker_general);
@@ -142,7 +147,7 @@ public class NewsStandRefresh {
                         cur_marker.getTitle(), cur_marker.getSnippet());
     
                 String cur_topic = cur_marker.getTopic();
-                Log.i("NewsStand", "cur_topic[" + cur_topic + "]");
+                //Log.i("NewsStand", "cur_topic[" + cur_topic + "]");
     
                 int my_marker = 0;
     
@@ -158,6 +163,10 @@ public class NewsStandRefresh {
                     my_marker = R.drawable.marker_scitech;
                 else if (cur_topic.equals("Sports"))
                     my_marker = R.drawable.marker_sports;
+                else {
+                    my_marker = R.drawable.marker_general;
+                    Toast.makeText(_ctx, "Bad topic: " + cur_topic, Toast.LENGTH_SHORT).show();
+                }
                 itemizedoverlay.addOverlay(overlayitem, _resources.getDrawable(my_marker));
             }
             if (feed.getMarkerCount() > 0) {
@@ -166,10 +175,10 @@ public class NewsStandRefresh {
                 mapOverlays.add(itemizedoverlay);
                 _mapView.invalidate();
             }
-        }
-        finally {
+        //}
+        //finally {
             l.unlock();
-        }
+        //}
     }
     
     private MarkerFeed getFeed(String urlToRssFeed) {
@@ -208,14 +217,14 @@ public class NewsStandRefresh {
         private int refresh_idx;
 
         protected MarkerFeed doInBackground(String... string) {
-            try {
+            //try {
                 m_ajax_idx++;
                 refresh_idx = m_ajax_idx;
                 return getMarkers();
-            } catch (Exception e) {
-                Log.e(">>>>>>>>>>>> Error getting myData: ", e.getMessage(), e);
-                return null;
-            }
+            //} catch (Exception e) {
+            //    Log.e(">>>>>>>>>>>> Error getting myData: ", e.getMessage(), e);
+            //    return null;
+            //}
         }
 
         protected void onProgressUpdate(Integer... progress) {
