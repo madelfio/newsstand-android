@@ -39,7 +39,7 @@
                         android:defaultValue="false"
                         />
   </PreferenceCategory>
-  <PreferenceCategory android:title="Media Filters">
+  <PreferenceCategory android:title="Media">
     <ListPreference android:title="Filter Images" 
                     android:key="images"
                     android:summary="Select number of images to display"
