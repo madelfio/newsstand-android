@@ -15,28 +15,34 @@
                         android:defaultValue="true"
                         />
     <CheckBoxPreference android:title="General"
-                        android:key="general_topics" 
+                        android:key="general_topics"
                         android:defaultValue="false"
+                        android:dependency="all_topics"
                         />
     <CheckBoxPreference android:title="Business"
                         android:key="business_topics" 
                         android:defaultValue="false"
+                        android:dependency="all_topics"
                         />
     <CheckBoxPreference android:title="SciTech"
                         android:key="scitech_topics" 
                         android:defaultValue="false"
+                        android:dependency="all_topics"
                         />
     <CheckBoxPreference android:title="Entertainment"
                         android:key="entertainment_topics" 
                         android:defaultValue="false"
+                        android:dependency="all_topics"
                         />
     <CheckBoxPreference android:title="Health"
                         android:key="health_topics" 
                         android:defaultValue="false"
+                        android:dependency="all_topics"
                         />
     <CheckBoxPreference android:title="Sports"
                         android:key="sports_topics" 
                         android:defaultValue="false"
+                        android:dependency="all_topics"
                         />
   </PreferenceCategory>
   <PreferenceCategory android:title="Media">
