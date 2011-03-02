@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" 
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <LinearLayout
@@ -12,7 +12,7 @@
             android:layout_height="fill_parent"
             android:layout_marginTop="6px"
             android:text="Number of Markers:" />
-        <SeekBar 
+        <SeekBar
 	        android:layout_height="fill_parent"  
 	        android:id="@+id/slider"
 	        android:layout_width="fill_parent"
@@ -21,11 +21,23 @@
 	        android:max="100" 
 	        android:progress="50"/>
     </LinearLayout>
-    <edu.umd.umiacs.newsstand.NewsStandMapView
-        android:id="@+id/mapview"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true"
-        android:apiKey="0tFo30MjqLT4E9o6W24dT2gT4J925MioUeiKphg"
-        />
+        android:layout_height="fill_parent">
+	    <edu.umd.umiacs.newsstand.NewsStandMapView
+	        android:id="@+id/mapview"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:apiKey="0tFo30MjqLT4E9o6W24dT2gT4J925MioUeiKphg"
+	        />
+	    <LinearLayout
+	        android:id="@+id/search_options"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+		    android:layout_alignParentBottom="true"
+		    android:layout_centerHorizontal="true"
+		    android:paddingBottom="10px"
+		    />
+    </RelativeLayout>
 </LinearLayout>

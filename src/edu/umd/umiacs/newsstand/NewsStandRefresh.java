@@ -24,15 +24,15 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 public class NewsStandRefresh implements Runnable {
-    
-    private Context _ctx;
+
+    private final NewsStand _ctx;
     private NewsStandMapView _mapView = null;
     private SeekBar _slider = null;
     private NewsStandMapPopupPanel _popup_panel = null;
     private Resources _resources = null;
-    private SharedPreferences _prefs;
+    private SharedPreferences _prefs = null;
     private int m_num_executing = 0;
-    private Lock l = new ReentrantLock();
+    private final Lock l = new ReentrantLock();
     public int m_show_idx = 0;
     public int m_ajax_idx = 0;
 
@@ -41,20 +41,21 @@ public class NewsStandRefresh implements Runnable {
     public int m_lon_l = 0;
     public int m_lon_h = 0;
 
-    
+
     public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider, NewsStandMapPopupPanel popup_panel, SharedPreferences prefs) {
-        _ctx = ctx;
-        _mapView = mapView; 
+        _ctx = (NewsStand)ctx;
+        _mapView = mapView;
         _slider = slider;
         _popup_panel = popup_panel;
         _resources = ctx.getResources();
         _prefs = prefs;
     }
-    
+
+    @Override
     public void run() {
     	executeForce();
     }
-    
+
     public void execute() {
         //try {
             if (m_num_executing < 3) {
@@ -62,25 +63,24 @@ public class NewsStandRefresh implements Runnable {
                     updateBounds();
                     new RefreshTask().execute("");
                 }
-            } 
+            }
         //} catch (Exception e) {
         //    Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
         //}
     }
-    
+
     public void executeForce() {
         updateBounds();
-        m_num_executing++;
         new RefreshTask().execute("");
     }
-    
+
     public void clearSavedLocation() {
         m_lat_l = 0;
         m_lat_h = 0;
         m_lon_l = 0;
         m_lon_h = 0;
     }
-    
+
     private boolean curBoundsDiffer() {
         GeoPoint centerpoint = _mapView.getMapCenter();
         int lat_span = _mapView.getLatitudeSpan();
@@ -90,7 +90,7 @@ public class NewsStandRefresh implements Runnable {
         int lat_h = lat_l + lat_span;
         int lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
         int lon_h = lon_l + lon_span;
-        
+
         return (lat_l != m_lat_l || lat_h != m_lat_h || lon_l != m_lon_l || lon_h != m_lon_h);
     }
 
@@ -104,22 +104,21 @@ public class NewsStandRefresh implements Runnable {
         m_lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
         m_lon_h = m_lon_l + lon_span;
     }
-    
+
     private MarkerFeed getMarkers() {
         // get map coordinates
         String marker_url = "http://newsstand.umiacs.umd.edu/news/xml_map?lat_low=%f&lat_high=%f&lon_low=%f&lon_high=%f";
         marker_url = String
-                .format(marker_url, 
+                .format(marker_url,
                         m_lat_l / 1E6, m_lat_h / 1E6,
                         m_lon_l / 1E6, m_lon_h / 1E6);
-        
-        if (_mapView.current_search != null && _mapView.current_search != "") {
-            
-            marker_url += String.format("&search=%s", _mapView.current_search);
+
+        if (_ctx.mSearchQuery != null && _ctx.mSearchQuery != "") {
+            marker_url += String.format("&search=%s", _ctx.mSearchQuery);
         }
-        
+
         marker_url += topicQuery();
-        
+
         // TODO: do something with prefs here!!!
         // TODO: fix below... causes exception
 
@@ -127,7 +126,7 @@ public class NewsStandRefresh implements Runnable {
         //if (layer_id.length() > 0) {
         //    Toast.makeText(_ctx, "layer_id: " + layer_id, Toast.LENGTH_SHORT).show();
         //}
-        
+
         //Log.i("NewsStand", "marker_url[" + marker_url + "]");
         //Toast.makeText(_ctx, "URL: " + marker_url,
         //        Toast.LENGTH_SHORT).show();
@@ -151,7 +150,7 @@ public class NewsStandRefresh implements Runnable {
                 topics += "'SciTech',";
             }
             if (_prefs.getBoolean("entertainment_topics", false)) {
-                topics += "'Entertainment',"; 
+                topics += "'Entertainment',";
             }
             if (_prefs.getBoolean("health_topics", false)) {
                 topics += "'Health',";
@@ -165,7 +164,7 @@ public class NewsStandRefresh implements Runnable {
         }
         return "";
     }
-    
+
     private void setMarkers(MarkerFeed feed) {
         l.lock();
         //try {
@@ -181,12 +180,12 @@ public class NewsStandRefresh implements Runnable {
                         (int) (Float.valueOf(cur_marker.getLongitude()).floatValue() * 1E6));
                 OverlayItem overlayitem = new OverlayItem(point,
                         cur_marker.getTitle(), cur_marker.getSnippet());
-    
+
                 String cur_topic = cur_marker.getTopic();
                 //Log.i("NewsStand", "cur_topic[" + cur_topic + "]");
-    
+
                 int my_marker = 0;
-    
+
                 if (cur_topic.equals("General"))
                     my_marker = R.drawable.marker_general;
                 else if (cur_topic.equals("Business"))
@@ -216,7 +215,7 @@ public class NewsStandRefresh implements Runnable {
             l.unlock();
         //}
     }
-    
+
     private MarkerFeed getFeed(String urlToRssFeed) {
         try {
             // set up the url
@@ -252,6 +251,7 @@ public class NewsStandRefresh implements Runnable {
 
         private int refresh_idx;
 
+        @Override
         protected MarkerFeed doInBackground(String... string) {
             //try {
 
@@ -265,10 +265,12 @@ public class NewsStandRefresh implements Runnable {
             //}
         }
 
+        @Override
         protected void onProgressUpdate(Integer... progress) {
             // setProgressPercent(progress[0]);
         }
 
+        @Override
         protected void onPostExecute(MarkerFeed feed) {
             if (feed != null) {
                 if (refresh_idx > m_show_idx) {
