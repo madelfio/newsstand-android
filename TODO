@@ -2,8 +2,17 @@ Done
 - Get Auto-Refresh working
 - Get slider working
 - Fix crashes when panning repeatedly
+- Implement Topic selection in Settings window
+- Search
+  - Added search functionality when tapping menu/search
+  - Added search functionality when tapping search key
+  - Added voice search
+  - Added display of searched term
 
 Todo
+- Search
+  - Reposition display of searched term
+  - Allow user to clear search
 - Find appropriate bubbles to use when tapping on cluster markers
 - Support viewing images for a story
 - Implement Search functionality
