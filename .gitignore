@@ -15,3 +15,6 @@ bin/**
 
 # VIM files
 *.swp
+
+# key/certificate keystores
+*.keystore
