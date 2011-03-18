@@ -11,14 +11,12 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
 public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
-    private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
-    private Context mContext;
-    //private NewsStandMapPopupPanel mPanel;
-    
-    public NewsStandItemizedOverlay(Drawable defaultMarker, Context context, NewsStandMapPopupPanel panel) {
+    private final ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
+    private final Context mContext;
+
+    public NewsStandItemizedOverlay(Drawable defaultMarker, Context context) {
         super(boundCenterBottom(defaultMarker));
         mContext = context;
-        //mPanel = panel;
     }
 
     // append new overlay object to mOverlays array
@@ -26,7 +24,7 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
         mOverlays.add(overlay);
         populate();
     }
-    
+
     public void setPctShown(int pct_to_show, Context context) {
         int num_to_show = mOverlays.size() * pct_to_show / 100;
         for (int i=0; i < mOverlays.size(); i++) {
@@ -47,13 +45,13 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
     // this must be done within the class because boundCenterBottom is protected
     public void addOverlay(OverlayItem overlay, Drawable marker) {
         marker.setBounds(-marker.getIntrinsicWidth() / 3,
-               -marker.getIntrinsicHeight() * 2 / 3, 
+               -marker.getIntrinsicHeight() * 2 / 3,
                marker.getIntrinsicWidth() / 3,
                 0);
         overlay.setMarker(marker);
         addOverlay(overlay);
     }
-    
+
     @Override
     protected OverlayItem createItem(int i) {
         return mOverlays.get(i);
@@ -68,18 +66,18 @@ public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
     protected boolean onTap(int index) {
         OverlayItem item = mOverlays.get(index);
         Drawable marker = item.getMarker(0);
-        
+
         if (!marker.isVisible()) {
             return true;
         }
 
         //mPanel.display(item.getPoint(), item.getTitle(), item.getSnippet());
-        
+
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
         dialog.setTitle(item.getTitle());
         dialog.setMessage(Html.fromHtml(item.getSnippet()));
         dialog.show();
         return true;
     }
-    
+
 }

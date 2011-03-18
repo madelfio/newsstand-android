@@ -28,7 +28,6 @@ public class NewsStandRefresh implements Runnable {
     private final NewsStand _ctx;
     private NewsStandMapView _mapView = null;
     private SeekBar _slider = null;
-    private NewsStandMapPopupPanel _popup_panel = null;
     private Resources _resources = null;
     private SharedPreferences _prefs = null;
     private int m_num_executing = 0;
@@ -41,12 +40,10 @@ public class NewsStandRefresh implements Runnable {
     public int m_lon_l = 0;
     public int m_lon_h = 0;
 
-
-    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider, NewsStandMapPopupPanel popup_panel, SharedPreferences prefs) {
+    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider, SharedPreferences prefs) {
         _ctx = (NewsStand)ctx;
         _mapView = mapView;
         _slider = slider;
-        _popup_panel = popup_panel;
         _resources = ctx.getResources();
         _prefs = prefs;
     }
@@ -57,16 +54,12 @@ public class NewsStandRefresh implements Runnable {
     }
 
     public void execute() {
-        //try {
-            if (m_num_executing < 3) {
-                if (curBoundsDiffer()) {
-                    updateBounds();
-                    new RefreshTask().execute("");
-                }
+        if (m_num_executing < 3) {
+            if (curBoundsDiffer()) {
+                updateBounds();
+                new RefreshTask().execute("");
             }
-        //} catch (Exception e) {
-        //    Log.e(">>>>>>>>>>>> Error executing MyAsyncTask: ", e.getMessage(), e);
-        //}
+        }
     }
 
     public void executeForce() {
@@ -119,18 +112,6 @@ public class NewsStandRefresh implements Runnable {
 
         marker_url += topicQuery();
 
-        // TODO: do something with prefs here!!!
-        // TODO: fix below... causes exception
-
-        //String layer_id = _prefs.getString("layers", null);
-        //if (layer_id.length() > 0) {
-        //    Toast.makeText(_ctx, "layer_id: " + layer_id, Toast.LENGTH_SHORT).show();
-        //}
-
-        //Log.i("NewsStand", "marker_url[" + marker_url + "]");
-        //Toast.makeText(_ctx, "URL: " + marker_url,
-        //        Toast.LENGTH_SHORT).show();
-
         return getFeed(marker_url);
     }
 
@@ -172,7 +153,7 @@ public class NewsStandRefresh implements Runnable {
             Drawable drawable = _resources.getDrawable(
                     R.drawable.marker_general);
             NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
-                    drawable, _ctx, _popup_panel);
+                    drawable, _ctx);
             for (int i = 0; i < feed.getMarkerCount(); i++) {
                 MarkerInfo cur_marker = feed.getMarker(i);
                 GeoPoint point = new GeoPoint(
@@ -182,7 +163,6 @@ public class NewsStandRefresh implements Runnable {
                         cur_marker.getTitle(), cur_marker.getSnippet());
 
                 String cur_topic = cur_marker.getTopic();
-                //Log.i("NewsStand", "cur_topic[" + cur_topic + "]");
 
                 int my_marker = 0;
 

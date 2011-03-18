@@ -29,7 +29,6 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
     private SharedPreferences prefs;
     private NewsStandMapView mapView = null;
     private SeekBar slider = null;
-    private NewsStandMapPopupPanel popup_panel = null;
     private NewsStandRefresh refresh = null;
 
     public String mSearchQuery;
@@ -54,7 +53,6 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
         // initialize UI
         initMapView();
         initSlider();
-        initPopupPanel();
 
         // handle search requests
         handleIntent(getIntent());
@@ -126,12 +124,8 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
         });
     }
 
-    private void initPopupPanel() {
-        popup_panel = new NewsStandMapPopupPanel(this, R.layout.map_popup, mapView);
-    }
-
     private void initRefresh() {
-        refresh = new NewsStandRefresh(this, mapView, slider, popup_panel, prefs);
+        refresh = new NewsStandRefresh(this, mapView, slider, prefs);
     }
 
     @Override
