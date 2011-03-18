@@ -21,3 +21,8 @@ Todo
 - Implement Sources dialog
 - Implement Home functionality
 - Implement Top Stories mode.
+
+Notes for building release version:
+- Change NewsStandMapView API Key from DEBUG to PROD in main.xml
+- Remove android:debuggable attribute from AndroidManifest.xml
+- Go to File > Export > Export Android Application and follow instructions
