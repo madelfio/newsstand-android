@@ -2,8 +2,6 @@ package edu.umd.umiacs.newsstand;
 
 import java.net.URL;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -31,7 +29,6 @@ public class NewsStandRefresh implements Runnable {
     private Resources _resources = null;
     private SharedPreferences _prefs = null;
     private int m_num_executing = 0;
-    private final Lock l = new ReentrantLock();
     public int m_show_idx = 0;
     public int m_ajax_idx = 0;
 
@@ -147,53 +144,47 @@ public class NewsStandRefresh implements Runnable {
     }
 
     private void setMarkers(MarkerFeed feed) {
-        l.lock();
-        //try {
-            List<Overlay> mapOverlays = _mapView.getOverlays();
-            Drawable drawable = _resources.getDrawable(
-                    R.drawable.marker_general);
-            NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
-                    drawable, _ctx);
-            for (int i = 0; i < feed.getMarkerCount(); i++) {
-                MarkerInfo cur_marker = feed.getMarker(i);
-                GeoPoint point = new GeoPoint(
-                        (int) (Float.valueOf(cur_marker.getLatitude()).floatValue() * 1E6),
-                        (int) (Float.valueOf(cur_marker.getLongitude()).floatValue() * 1E6));
-                OverlayItem overlayitem = new OverlayItem(point,
-                        cur_marker.getTitle(), cur_marker.getSnippet());
+        List<Overlay> mapOverlays = _mapView.getOverlays();
+        Drawable drawable = _resources.getDrawable(
+                R.drawable.marker_general);
+        NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
+                drawable, _ctx);
+        for (int i = 0; i < feed.getMarkerCount(); i++) {
+            MarkerInfo cur_marker = feed.getMarker(i);
+            GeoPoint point = new GeoPoint(
+                    (int) (Float.valueOf(cur_marker.getLatitude()).floatValue() * 1E6),
+                    (int) (Float.valueOf(cur_marker.getLongitude()).floatValue() * 1E6));
+            OverlayItem overlayitem = new OverlayItem(point,
+                    cur_marker.getTitle(), cur_marker.getSnippet());
 
-                String cur_topic = cur_marker.getTopic();
+            String cur_topic = cur_marker.getTopic();
 
-                int my_marker = 0;
+            int my_marker = 0;
 
-                if (cur_topic.equals("General"))
-                    my_marker = R.drawable.marker_general;
-                else if (cur_topic.equals("Business"))
-                    my_marker = R.drawable.marker_business;
-                else if (cur_topic.equals("Entertainment"))
-                    my_marker = R.drawable.marker_entertainment;
-                else if (cur_topic.equals("Health"))
-                    my_marker = R.drawable.marker_health;
-                else if (cur_topic.equals("SciTech"))
-                    my_marker = R.drawable.marker_scitech;
-                else if (cur_topic.equals("Sports"))
-                    my_marker = R.drawable.marker_sports;
-                else {
-                    my_marker = R.drawable.marker_general;
-                    Toast.makeText(_ctx, "Bad topic: " + cur_topic, Toast.LENGTH_SHORT).show();
-                }
-                itemizedoverlay.addOverlay(overlayitem, _resources.getDrawable(my_marker));
+            if (cur_topic.equals("General"))
+                my_marker = R.drawable.marker_general;
+            else if (cur_topic.equals("Business"))
+                my_marker = R.drawable.marker_business;
+            else if (cur_topic.equals("Entertainment"))
+                my_marker = R.drawable.marker_entertainment;
+            else if (cur_topic.equals("Health"))
+                my_marker = R.drawable.marker_health;
+            else if (cur_topic.equals("SciTech"))
+                my_marker = R.drawable.marker_scitech;
+            else if (cur_topic.equals("Sports"))
+                my_marker = R.drawable.marker_sports;
+            else {
+                my_marker = R.drawable.marker_general;
+                Toast.makeText(_ctx, "Bad topic: " + cur_topic, Toast.LENGTH_SHORT).show();
             }
-            if (feed.getMarkerCount() > 0) {
-                itemizedoverlay.setPctShown(_slider.getProgress(), _ctx);
-                mapOverlays.clear();
-                mapOverlays.add(itemizedoverlay);
-                _mapView.invalidate();
-            }
-        //}
-        //finally {
-            l.unlock();
-        //}
+            itemizedoverlay.addOverlay(overlayitem, _resources.getDrawable(my_marker));
+        }
+        if (feed.getMarkerCount() > 0) {
+            itemizedoverlay.setPctShown(_slider.getProgress(), _ctx);
+            mapOverlays.clear();
+            mapOverlays.add(itemizedoverlay);
+            _mapView.invalidate();
+        }
     }
 
     private MarkerFeed getFeed(String urlToRssFeed) {
@@ -233,16 +224,10 @@ public class NewsStandRefresh implements Runnable {
 
         @Override
         protected MarkerFeed doInBackground(String... string) {
-            //try {
-
-                m_num_executing++;
-                m_ajax_idx++;
-                refresh_idx = m_ajax_idx;
-                return getMarkers();
-            //} catch (Exception e) {
-            //    Log.e(">>>>>>>>>>>> Error getting myData: ", e.getMessage(), e);
-            //    return null;
-            //}
+            m_num_executing++;
+            m_ajax_idx++;
+            refresh_idx = m_ajax_idx;
+            return getMarkers();
         }
 
         @Override
@@ -256,7 +241,6 @@ public class NewsStandRefresh implements Runnable {
                 if (refresh_idx > m_show_idx) {
                     m_show_idx = refresh_idx;
                     setMarkers(feed);
-                    //Toast.makeText(_ctx, "Topic Query: " + topicQuery(), Toast.LENGTH_SHORT).show();
                 }
                 m_num_executing--;
             } else {
