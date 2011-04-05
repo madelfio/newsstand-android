@@ -29,7 +29,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
     private SharedPreferences prefs;
     private NewsStandMapView mapView = null;
     private SeekBar slider = null;
-    private NewsStandRefresh refresh = null;
+    private Refresh refresh = null;
 
     public String mSearchQuery;
     private LinearLayout mSearchLayout;
@@ -110,7 +110,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 List<Overlay> mapOverlays = mapView.getOverlays();
                 if (mapOverlays.size() > 0) {
-                    NewsStandItemizedOverlay o = (NewsStandItemizedOverlay) mapOverlays.get(0);
+                    MarkerOverlay o = (MarkerOverlay) mapOverlays.get(0);
                     o.setPctShown(progress, getApplicationContext());
                     mapView.invalidate();
                 }
@@ -125,7 +125,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
     }
 
     private void initRefresh() {
-        refresh = new NewsStandRefresh(this, mapView, slider, prefs);
+        refresh = new Refresh(this, mapView, slider, prefs);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
             break;
         //case R.id.locate:
         case R.id.settings:
-            Intent i = new Intent(this, NewsStandPreferences.class);
+            Intent i = new Intent(this, Settings.class);
             startActivity(i);
             break;
         case R.id.locate:

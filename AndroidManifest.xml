@@ -19,7 +19,7 @@
                        android:resource="@xml/searchable"/>
             
         </activity>
-        <activity android:name=".NewsStandPreferences" />
+        <activity android:name=".Settings" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

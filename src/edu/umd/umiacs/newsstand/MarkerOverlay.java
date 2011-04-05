@@ -10,11 +10,11 @@ import android.text.Html;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
-public class NewsStandItemizedOverlay extends ItemizedOverlay<OverlayItem> {
+public class MarkerOverlay extends ItemizedOverlay<OverlayItem> {
     private final ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
     private final Context mContext;
 
-    public NewsStandItemizedOverlay(Drawable defaultMarker, Context context) {
+    public MarkerOverlay(Drawable defaultMarker, Context context) {
         super(boundCenterBottom(defaultMarker));
         mContext = context;
     }

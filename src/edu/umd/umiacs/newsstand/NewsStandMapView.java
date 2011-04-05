@@ -9,7 +9,7 @@ import com.google.android.maps.MapView;
 
 public class NewsStandMapView extends MapView {
     private long lastTouchTime = -1;
-    private NewsStandRefresh refresh;
+    private Refresh refresh;
     Context ctx = null;
 
     public NewsStandMapView(Context context, AttributeSet attrs) {
@@ -17,7 +17,7 @@ public class NewsStandMapView extends MapView {
         ctx = context;
     }
 
-    public void setRefresh(NewsStandRefresh refresh_instance) {
+    public void setRefresh(Refresh refresh_instance) {
         refresh = refresh_instance;
     }
 

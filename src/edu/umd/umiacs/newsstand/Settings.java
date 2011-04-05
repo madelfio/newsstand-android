@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 
-public class NewsStandPreferences extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class Settings extends PreferenceActivity implements OnSharedPreferenceChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

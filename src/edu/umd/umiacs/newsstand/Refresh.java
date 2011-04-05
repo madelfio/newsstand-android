@@ -21,7 +21,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
-public class NewsStandRefresh implements Runnable {
+public class Refresh implements Runnable {
 
     private final NewsStand _ctx;
     private NewsStandMapView _mapView = null;
@@ -37,7 +37,7 @@ public class NewsStandRefresh implements Runnable {
     public int m_lon_l = 0;
     public int m_lon_h = 0;
 
-    public NewsStandRefresh(Context ctx, NewsStandMapView mapView, SeekBar slider, SharedPreferences prefs) {
+    public Refresh(Context ctx, NewsStandMapView mapView, SeekBar slider, SharedPreferences prefs) {
         _ctx = (NewsStand)ctx;
         _mapView = mapView;
         _slider = slider;
@@ -47,7 +47,7 @@ public class NewsStandRefresh implements Runnable {
 
     @Override
     public void run() {
-    	executeForce();
+        executeForce();
     }
 
     public void execute() {
@@ -147,8 +147,7 @@ public class NewsStandRefresh implements Runnable {
         List<Overlay> mapOverlays = _mapView.getOverlays();
         Drawable drawable = _resources.getDrawable(
                 R.drawable.marker_general);
-        NewsStandItemizedOverlay itemizedoverlay = new NewsStandItemizedOverlay(
-                drawable, _ctx);
+        MarkerOverlay itemizedoverlay = new MarkerOverlay(drawable, _ctx);
         for (int i = 0; i < feed.getMarkerCount(); i++) {
             MarkerInfo cur_marker = feed.getMarker(i);
             GeoPoint point = new GeoPoint(
