@@ -30,10 +30,13 @@ public class PopupPanel extends Overlay {
     private final int MARKER_HEIGHT = 40;
     private final int RECT_MARGIN = 10;
     private final int TEXT_MARGIN = 20;
-    //private final int LEFT_TEXT_MARGIN = 20;
-    //private final int RIGHT_TEXT_MARGIN = 15;
+    private final int ARROW_HEIGHT = 5;
+    private final int ARROW_WIDTH = 40;
 
-    private Paint innerPaint, borderPaint, textPaint;
+    private int mArrowOffset;
+    private boolean mAlignTop;
+
+    private Paint innerPaint, borderPaint, textPaint, arrowPaint;
 
     PopupPanel(Context ctx, int layout, NewsStandMapView map) {
         mCtx = ctx;
@@ -57,6 +60,9 @@ public class PopupPanel extends Overlay {
     }
 
     public void show(boolean alignTop, Point marker_pos ) {
+        mAlignTop = alignTop;
+        mArrowOffset = marker_pos.x;
+
         // Show text view
         RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -95,6 +101,22 @@ public class PopupPanel extends Overlay {
             int height = v.getHeight() + 2 * RECT_MARGIN;
             int left = v.getLeft() - RECT_MARGIN;
             int top = v.getTop() - RECT_MARGIN;
+            int arrow_left = mArrowOffset - ARROW_WIDTH / 2;
+            int arrow_right = mArrowOffset + ARROW_WIDTH / 2;
+            int arrow_top;
+            int arrow_bottom;
+
+            if (mAlignTop) {
+                arrow_top = v.getBottom() + RECT_MARGIN - ARROW_HEIGHT;
+                arrow_bottom = v.getBottom() + RECT_MARGIN;
+            }
+            else {
+                arrow_top = v.getTop() - RECT_MARGIN;
+                arrow_bottom = v.getTop() - RECT_MARGIN + ARROW_HEIGHT;
+            }
+
+            arrow_left = (arrow_left < left) ? left : arrow_left;
+            arrow_right = (arrow_right > (left + width)) ? (left + width) : arrow_right;
 
             RectF infoWindowRect = new RectF(0, 0, width, height);
             infoWindowRect.offset(left, top);
@@ -104,6 +126,11 @@ public class PopupPanel extends Overlay {
 
             //  Draw border for info window
             canvas.drawRoundRect(infoWindowRect, 5, 5, getBorderPaint());
+
+            //  Draw arrow pointing to relavent location
+            //  (the arrow is actually a filled rectangle adjacent to the
+            //  cluster marker)
+            canvas.drawRect(arrow_left, arrow_top, arrow_right, arrow_bottom, getArrowPaint());
         }
     }
 
@@ -114,8 +141,8 @@ public class PopupPanel extends Overlay {
 
         View view = getView();
 
-        snippet = str_replace(snippet, "<span class='georef'>", "<font color=\"red\">");
-        snippet = str_replace(snippet, "</span>", "</font>");
+        snippet = str_replace(snippet, "<span class='georef'>", "<b><font color=\"red\">");
+        snippet = str_replace(snippet, "</span>", "</font></b>");
         snippet = str_replace(snippet, "&mdash;", "-");
         snippet = str_replace(snippet, "&ldquo;", "\"");
         snippet = str_replace(snippet, "&rdquo;", "\"");
@@ -174,6 +201,15 @@ public class PopupPanel extends Overlay {
             borderPaint.setStrokeWidth(2);
         }
         return borderPaint;
+    }
+
+    public Paint getArrowPaint() {
+        if ( arrowPaint == null) {
+            arrowPaint = new Paint();
+            arrowPaint.setARGB(255, 255, 255, 255);
+            arrowPaint.setAntiAlias(true);
+        }
+        return arrowPaint;
     }
 
     public Paint getTextPaint() {
