@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -50,7 +51,9 @@ public class PopupPanel extends Overlay {
         popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hide();
+
+                Intent i = new Intent(mCtx, ClusterViewer.class);
+                mCtx.startActivity(i);
             }
         });
     }

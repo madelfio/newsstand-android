@@ -73,5 +73,4 @@ public class MarkerOverlay extends ItemizedOverlay<OverlayItem> {
 
         return true;
     }
-
 }
