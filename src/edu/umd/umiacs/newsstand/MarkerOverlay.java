@@ -2,21 +2,19 @@ package edu.umd.umiacs.newsstand;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.text.Html;
 
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
 public class MarkerOverlay extends ItemizedOverlay<OverlayItem> {
     private final ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
-    private final Context mContext;
+    private final NewsStand mContext;
 
     public MarkerOverlay(Drawable defaultMarker, Context context) {
         super(boundCenterBottom(defaultMarker));
-        mContext = context;
+        mContext = (NewsStand)context;
     }
 
     // append new overlay object to mOverlays array
@@ -71,12 +69,8 @@ public class MarkerOverlay extends ItemizedOverlay<OverlayItem> {
             return true;
         }
 
-        //mPanel.display(item.getPoint(), item.getTitle(), item.getSnippet());
+        mContext.panel.display(item.getPoint(), item.getTitle(), item.getSnippet());
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-        dialog.setTitle(item.getTitle());
-        dialog.setMessage(Html.fromHtml(item.getSnippet()));
-        dialog.show();
         return true;
     }
 

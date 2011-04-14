@@ -180,8 +180,12 @@ public class Refresh implements Runnable {
         }
         if (feed.getMarkerCount() > 0) {
             itemizedoverlay.setPctShown(_slider.getProgress(), _ctx);
-            mapOverlays.clear();
-            mapOverlays.add(itemizedoverlay);
+            if (mapOverlays.size() > 0) {
+                mapOverlays.set(0,itemizedoverlay);
+            }
+            else {
+                mapOverlays.add(itemizedoverlay);
+            }
             _mapView.invalidate();
         }
     }
