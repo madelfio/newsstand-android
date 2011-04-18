@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
@@ -62,15 +63,27 @@ public class MarkerOverlay extends ItemizedOverlay<OverlayItem> {
 
     @Override
     protected boolean onTap(int index) {
-        OverlayItem item = mOverlays.get(index);
+        MarkerOverlayItem item = (MarkerOverlayItem)mOverlays.get(index);
         Drawable marker = item.getMarker(0);
 
         if (!marker.isVisible()) {
             return true;
         }
 
-        _ctx.getPanel().display(item.getPoint(), item.getTitle(), item.getSnippet());
+        _ctx.getPanel().display(item.getPoint(), item.getTitle(), item.getSnippet(), item.getGazID());
 
         return true;
+    }
+
+    public static class MarkerOverlayItem extends OverlayItem {
+        String mGazID;
+        public MarkerOverlayItem(GeoPoint point, String title, String snippet, String gaz_id) {
+            super(point, title, snippet);
+            mGazID = gaz_id;
+        }
+
+        public String getGazID() {
+            return mGazID;
+        }
     }
 }

@@ -19,7 +19,8 @@ import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
+
+import edu.umd.umiacs.newsstand.MarkerOverlay.MarkerOverlayItem;
 
 public class Refresh implements Runnable {
 
@@ -156,8 +157,8 @@ public class Refresh implements Runnable {
             GeoPoint point = new GeoPoint(
                     (int) (Float.valueOf(cur_marker.getLatitude()).floatValue() * 1E6),
                     (int) (Float.valueOf(cur_marker.getLongitude()).floatValue() * 1E6));
-            OverlayItem overlayitem = new OverlayItem(point,
-                    cur_marker.getTitle(), cur_marker.getSnippet());
+            MarkerOverlayItem overlayitem = new MarkerOverlayItem(point,
+                    cur_marker.getTitle(), cur_marker.getSnippet(), cur_marker.getGazID());
 
             String cur_topic = cur_marker.getTopic();
 

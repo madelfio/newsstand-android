@@ -40,6 +40,8 @@ public class PopupPanel extends Overlay {
 
     private Paint innerPaint, borderPaint, textPaint, arrowPaint;
 
+    private String mGazId;
+
     PopupPanel(Context ctx, int layout, NewsStandMapView map_view) {
         _ctx = (NewsStand)ctx;
         _mapView = map_view;
@@ -54,6 +56,7 @@ public class PopupPanel extends Overlay {
             public void onClick(View v) {
 
                 Intent i = new Intent(_ctx, ClusterViewer.class);
+                i.putExtra("gaz_id", mGazId);
                 _ctx.startActivity(i);
             }
         });
@@ -139,7 +142,7 @@ public class PopupPanel extends Overlay {
     }
 
 
-    public void display(GeoPoint marker_loc, String headline, String snippet) {
+    public void display(GeoPoint marker_loc, String headline, String snippet, String gaz_id) {
 
         Point pt=_mapView.getProjection().toPixels(marker_loc, null);
 
@@ -154,9 +157,13 @@ public class PopupPanel extends Overlay {
         snippet = str_replace(snippet, "&#39;", "'");
         snippet = str_replace(snippet, "&#x2029;", "");
 
+        //headline = str_replace(headline, "&amp;", "&");
+
         ((TextView)view.findViewById(R.id.headline)).setText(headline);
         //((TextView)view.findViewById(R.id.snippet)).setText(snippet);
         ((TextView)view.findViewById(R.id.snippet)).setText(Html.fromHtml(snippet));
+
+        mGazId = gaz_id;
 
         show(pt.y*2>_mapView.getHeight(), pt);
     }
