@@ -22,10 +22,11 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
 public class PopupPanel extends Overlay {
-    View popup;
-    boolean isVisible=false;
-    NewsStandMapView mMap = null;
-    Context mCtx = null;
+    private final NewsStandMapView _mapView;
+    private final NewsStand _ctx;
+
+    private final View popup;
+    private boolean isVisible=false;
 
     private final int POPUP_OFFSET = 15;
     private final int MARKER_HEIGHT = 40;
@@ -39,10 +40,10 @@ public class PopupPanel extends Overlay {
 
     private Paint innerPaint, borderPaint, textPaint, arrowPaint;
 
-    PopupPanel(Context ctx, int layout, NewsStandMapView map) {
-        mCtx = ctx;
-        mMap = map;
-        ViewGroup parent=(ViewGroup)mMap.getParent();
+    PopupPanel(Context ctx, int layout, NewsStandMapView map_view) {
+        _ctx = (NewsStand)ctx;
+        _mapView = map_view;
+        ViewGroup parent=(ViewGroup)_mapView.getParent();
 
         LayoutInflater inflater = (LayoutInflater)ctx.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
@@ -52,8 +53,8 @@ public class PopupPanel extends Overlay {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(mCtx, ClusterViewer.class);
-                mCtx.startActivity(i);
+                Intent i = new Intent(_ctx, ClusterViewer.class);
+                _ctx.startActivity(i);
             }
         });
     }
@@ -73,7 +74,7 @@ public class PopupPanel extends Overlay {
 
         if (alignTop) {
             lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            lp.setMargins(TEXT_MARGIN, 0, TEXT_MARGIN, (mMap.getHeight() - marker_pos.y) + MARKER_HEIGHT + POPUP_OFFSET);
+            lp.setMargins(TEXT_MARGIN, 0, TEXT_MARGIN, (_mapView.getHeight() - marker_pos.y) + MARKER_HEIGHT + POPUP_OFFSET);
         }
         else {
             lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -82,15 +83,15 @@ public class PopupPanel extends Overlay {
 
         hide();
 
-        ViewGroup parent=(ViewGroup)mMap.getParent();
+        ViewGroup parent=(ViewGroup)_mapView.getParent();
         parent.addView(popup, lp);
         isVisible=true;
 
-        if (mMap.getOverlays().size() >= 2) {
-            mMap.getOverlays().set(1, this);
+        if (_mapView.getOverlays().size() >= 2) {
+            _mapView.getOverlays().set(1, this);
         }
         else {
-            mMap.getOverlays().add(this);
+            _mapView.getOverlays().add(this);
         }
     }
 
@@ -140,7 +141,7 @@ public class PopupPanel extends Overlay {
 
     public void display(GeoPoint marker_loc, String headline, String snippet) {
 
-        Point pt=mMap.getProjection().toPixels(marker_loc, null);
+        Point pt=_mapView.getProjection().toPixels(marker_loc, null);
 
         View view = getView();
 
@@ -157,7 +158,7 @@ public class PopupPanel extends Overlay {
         //((TextView)view.findViewById(R.id.snippet)).setText(snippet);
         ((TextView)view.findViewById(R.id.snippet)).setText(Html.fromHtml(snippet));
 
-        show(pt.y*2>mMap.getHeight(), pt);
+        show(pt.y*2>_mapView.getHeight(), pt);
     }
 
     // Naive unescaping of HTML...

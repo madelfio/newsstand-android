@@ -30,16 +30,15 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.Overlay;
 
 public class NewsStand extends MapActivity implements View.OnClickListener {
-    private SharedPreferences prefs;
-    private NewsStandMapView mapView = null;
-    private SeekBar slider = null;
-    private Refresh refresh = null;
-    PopupPanel panel;
+    private SharedPreferences mPrefs;
+    private NewsStandMapView mMapView;
+    private SeekBar mSlider;
+    private Refresh mRefresh;
+    private PopupPanel mPanel;
 
     public String mSearchQuery;
     private LinearLayout mSearchLayout;
     private TextView mSearchView;
-
 
     @Override
     protected boolean isRouteDisplayed() {
@@ -66,13 +65,33 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
 
         // initialize Refresh processing object
         initRefresh();
-        mapView.setRefresh(refresh);
+        mMapView.setRefresh(mRefresh);
+    }
+
+    public Refresh getRefresh() {
+        return mRefresh;
+    }
+
+    public NewsStandMapView getMapView() {
+        return mMapView;
+    }
+
+    public PopupPanel getPanel() {
+        return mPanel;
+    }
+
+    public SharedPreferences getPrefs() {
+        return mPrefs;
+    }
+
+    public SeekBar getSlider() {
+        return mSlider;
     }
 
     /** load default or saved prefs into prefs object **/
     public void initPrefs() {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     @Override
@@ -92,7 +111,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        refresh.clearSavedLocation();
+        mRefresh.clearSavedLocation();
         mapUpdateForce();
     }
 
@@ -105,25 +124,25 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
 
     public void mapUpdateForce(int ms) {
         Handler mHandler = new Handler();
-        mHandler.postDelayed(refresh, ms);
+        mHandler.postDelayed(mRefresh, ms);
     }
 
     private void initMapView() {
-        mapView = (NewsStandMapView) findViewById(R.id.mapview);
-        mapView.setBuiltInZoomControls(false);
+        mMapView = (NewsStandMapView) findViewById(R.id.mapview);
+        mMapView.setBuiltInZoomControls(false);
     }
 
     private void initSlider() {
-        slider = (SeekBar) findViewById(R.id.slider);
-        slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+        mSlider = (SeekBar) findViewById(R.id.slider);
+        mSlider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                List<Overlay> mapOverlays = mapView.getOverlays();
+                List<Overlay> mapOverlays = mMapView.getOverlays();
                 if (mapOverlays.size() > 0) {
                     MarkerOverlay o = (MarkerOverlay) mapOverlays.get(0);
                     o.setPctShown(progress, getApplicationContext());
-                    mapView.invalidate();
+                    mMapView.invalidate();
                 }
             }
 
@@ -136,11 +155,11 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
     }
 
     private void initPopupPanel() {
-        panel = new PopupPanel(this, R.layout.popup_panel, mapView);
+        mPanel = new PopupPanel(this, R.layout.popup_panel, mMapView);
     }
 
     private void initRefresh() {
-        refresh = new Refresh(this, mapView, slider, prefs);
+        mRefresh = new Refresh(this);
     }
 
     @Override
@@ -166,7 +185,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
             break;
         case R.id.sources:
         case R.id.home:
-            mapView.goToCurrentLocation();
+            mMapView.goToCurrentLocation();
             break;
         case R.id.top_stories:
         default:
@@ -204,7 +223,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
 
         searchOptions.addView(mSearchLayout);
         Toast.makeText(this, "Searching for: " + query, Toast.LENGTH_SHORT).show();
-        mapView.updateMapWindowForce();
+        mMapView.updateMapWindowForce();
     }
 
     public void clearSearch () {
@@ -212,7 +231,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
         LinearLayout searchOptions = (LinearLayout)findViewById(R.id.search_options);
         searchOptions.removeView(mSearchLayout);
         Toast.makeText(this, "Search cleared.", Toast.LENGTH_SHORT).show();
-        mapView.updateMapWindowForce();
+        mMapView.updateMapWindowForce();
     }
 
     @Override
@@ -234,7 +253,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int whichButton) {
                 Editable value = input.getText();
                 //Toast.makeText(getContext(), "You searched for: " + value, Toast.LENGTH_SHORT).show();
-                mapView.goToPlace(value.toString());
+                mMapView.goToPlace(value.toString());
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

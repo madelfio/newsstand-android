@@ -19,11 +19,12 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
 public class NewsStandMapView extends MapView {
+    private final NewsStand _ctx;
+    private Refresh _refresh;
+
     private long lastTouchTime = -1;
-    private Refresh refresh;
-    NewsStand _ctx = null;
-    LocationManager locationManager;
-    MapController mapController;
+    private LocationManager locationManager;
+    private MapController mapController;
 
     public NewsStandMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,7 +39,7 @@ public class NewsStandMapView extends MapView {
     }
 
     public void setRefresh(Refresh refresh_instance) {
-        refresh = refresh_instance;
+        _refresh = refresh_instance;
     }
 
     private void initLocate() {
@@ -88,7 +89,7 @@ public class NewsStandMapView extends MapView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        _ctx.panel.hide();
+        _ctx.getPanel().hide();
 
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             long thisTime = System.currentTimeMillis();
@@ -119,18 +120,18 @@ public class NewsStandMapView extends MapView {
     }
 
     public void updateMapWindow() {
-        if (refresh == null) {
+        if (_refresh == null) {
             Toast.makeText(_ctx, "Refresh object is null.  Can't refresh", Toast.LENGTH_SHORT).show();
         } else {
-            refresh.execute();
+            _refresh.execute();
         }
     }
 
     public void updateMapWindowForce() {
-        if (refresh == null) {
+        if (_refresh == null) {
             Toast.makeText(_ctx, "Refresh object is null.  Can't refresh", Toast.LENGTH_SHORT).show();
         } else {
-            refresh.executeForce();
+            _refresh.executeForce();
         }
     }
 }

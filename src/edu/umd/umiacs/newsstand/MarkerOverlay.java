@@ -10,11 +10,11 @@ import com.google.android.maps.OverlayItem;
 
 public class MarkerOverlay extends ItemizedOverlay<OverlayItem> {
     private final ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
-    private final NewsStand mContext;
+    private final NewsStand _ctx;
 
     public MarkerOverlay(Drawable defaultMarker, Context context) {
         super(boundCenterBottom(defaultMarker));
-        mContext = (NewsStand)context;
+        _ctx = (NewsStand)context;
     }
 
     // append new overlay object to mOverlays array
@@ -69,7 +69,7 @@ public class MarkerOverlay extends ItemizedOverlay<OverlayItem> {
             return true;
         }
 
-        mContext.panel.display(item.getPoint(), item.getTitle(), item.getSnippet());
+        _ctx.getPanel().display(item.getPoint(), item.getTitle(), item.getSnippet());
 
         return true;
     }

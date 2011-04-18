@@ -23,26 +23,29 @@ import com.google.android.maps.OverlayItem;
 
 public class Refresh implements Runnable {
 
+    // references to other class member variables
     private final NewsStand _ctx;
-    private NewsStandMapView _mapView = null;
-    private SeekBar _slider = null;
-    private Resources _resources = null;
-    private SharedPreferences _prefs = null;
-    private int m_num_executing = 0;
-    public int m_show_idx = 0;
-    public int m_ajax_idx = 0;
+    private final NewsStandMapView _mapView;
+    private final SeekBar _slider;
+    private final Resources _resources;
+    private final SharedPreferences _prefs;
 
-    public int m_lat_l = 0;
-    public int m_lat_h = 0;
-    public int m_lon_l = 0;
-    public int m_lon_h = 0;
+    // member variables
+    private int mNumExecuting = 0;
+    private int mShowIdx = 0;
+    private int mAjaxIdx = 0;
 
-    public Refresh(Context ctx, NewsStandMapView mapView, SeekBar slider, SharedPreferences prefs) {
+    private int mLatL = 0;
+    private int mLatH = 0;
+    private int mLonL = 0;
+    private int mLonH = 0;
+
+    public Refresh(Context ctx) {
         _ctx = (NewsStand)ctx;
-        _mapView = mapView;
-        _slider = slider;
-        _resources = ctx.getResources();
-        _prefs = prefs;
+        _mapView = _ctx.getMapView();
+        _slider = _ctx.getSlider();
+        _resources = _ctx.getResources();
+        _prefs = _ctx.getPrefs();
     }
 
     @Override
@@ -51,7 +54,7 @@ public class Refresh implements Runnable {
     }
 
     public void execute() {
-        if (m_num_executing < 3) {
+        if (mNumExecuting < 3) {
             if (curBoundsDiffer()) {
                 updateBounds();
                 new RefreshTask().execute("");
@@ -65,10 +68,10 @@ public class Refresh implements Runnable {
     }
 
     public void clearSavedLocation() {
-        m_lat_l = 0;
-        m_lat_h = 0;
-        m_lon_l = 0;
-        m_lon_h = 0;
+        mLatL = 0;
+        mLatH = 0;
+        mLonL = 0;
+        mLonH = 0;
     }
 
     private boolean curBoundsDiffer() {
@@ -81,7 +84,7 @@ public class Refresh implements Runnable {
         int lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
         int lon_h = lon_l + lon_span;
 
-        return (lat_l != m_lat_l || lat_h != m_lat_h || lon_l != m_lon_l || lon_h != m_lon_h);
+        return (lat_l != mLatL || lat_h != mLatH || lon_l != mLonL || lon_h != mLonH);
     }
 
     private void updateBounds() {
@@ -89,10 +92,10 @@ public class Refresh implements Runnable {
         int lat_span = _mapView.getLatitudeSpan();
         int lon_span = _mapView.getLongitudeSpan();
 
-        m_lat_l = centerpoint.getLatitudeE6() - (lat_span / 2);
-        m_lat_h = m_lat_l + lat_span;
-        m_lon_l = centerpoint.getLongitudeE6() - (lon_span / 2);
-        m_lon_h = m_lon_l + lon_span;
+        mLatL = centerpoint.getLatitudeE6() - (lat_span / 2);
+        mLatH = mLatL + lat_span;
+        mLonL = centerpoint.getLongitudeE6() - (lon_span / 2);
+        mLonH = mLonL + lon_span;
     }
 
     private MarkerFeed getMarkers() {
@@ -100,8 +103,8 @@ public class Refresh implements Runnable {
         String marker_url = "http://newsstand.umiacs.umd.edu/news/xml_map?lat_low=%f&lat_high=%f&lon_low=%f&lon_high=%f";
         marker_url = String
                 .format(marker_url,
-                        m_lat_l / 1E6, m_lat_h / 1E6,
-                        m_lon_l / 1E6, m_lon_h / 1E6);
+                        mLatL / 1E6, mLatH / 1E6,
+                        mLonL / 1E6, mLonH / 1E6);
 
         if (_ctx.mSearchQuery != null && _ctx.mSearchQuery != "") {
             marker_url += String.format("&search=%s", _ctx.mSearchQuery);
@@ -227,9 +230,9 @@ public class Refresh implements Runnable {
 
         @Override
         protected MarkerFeed doInBackground(String... string) {
-            m_num_executing++;
-            m_ajax_idx++;
-            refresh_idx = m_ajax_idx;
+            mNumExecuting++;
+            mAjaxIdx++;
+            refresh_idx = mAjaxIdx;
             return getMarkers();
         }
 
@@ -241,11 +244,11 @@ public class Refresh implements Runnable {
         @Override
         protected void onPostExecute(MarkerFeed feed) {
             if (feed != null) {
-                if (refresh_idx > m_show_idx) {
-                    m_show_idx = refresh_idx;
+                if (refresh_idx > mShowIdx) {
+                    mShowIdx = refresh_idx;
                     setMarkers(feed);
                 }
-                m_num_executing--;
+                mNumExecuting--;
             } else {
                 Toast.makeText(_ctx, "Null marker feed...", Toast.LENGTH_SHORT).show();
             }

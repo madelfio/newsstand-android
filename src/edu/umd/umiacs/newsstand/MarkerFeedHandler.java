@@ -5,32 +5,30 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class MarkerFeedHandler extends DefaultHandler {
-    
-    MarkerFeed _feed;
-    MarkerInfo _marker;
-    String _lastElementName = "";
-    boolean bFoundChannel = false;
 
-    final int RSS_TITLE = 1;
-    final int RSS_LATITUDE = 2;
-    final int RSS_LONGITUDE = 3;
-    final int RSS_NAME = 4;
-    final int RSS_DESCRIPTION = 5;
-    final int RSS_GAZ_ID = 6;
-    final int RSS_TOPIC = 7;
-    final int RSS_CLUSTER_ID = 8;
-    final int RSS_MARKUP = 9;
-    final int RSS_SNIPPET = 10;
-    
+    private MarkerFeed _feed;
+    private MarkerInfo _marker;
+
+    private final int RSS_TITLE = 1;
+    private final int RSS_LATITUDE = 2;
+    private final int RSS_LONGITUDE = 3;
+    private final int RSS_NAME = 4;
+    private final int RSS_DESCRIPTION = 5;
+    private final int RSS_GAZ_ID = 6;
+    private final int RSS_TOPIC = 7;
+    private final int RSS_CLUSTER_ID = 8;
+    private final int RSS_MARKUP = 9;
+    private final int RSS_SNIPPET = 10;
+
     int depth = 0;
     int currentstate = 0;
     /*
-     * Constructor 
+     * Constructor
      */
     MarkerFeedHandler()
     {
     }
-    
+
     /*
      * getFeed - this returns our feed when all of the parsing is complete
      */
@@ -38,8 +36,9 @@ public class MarkerFeedHandler extends DefaultHandler {
     {
         return _feed;
     }
-    
-    
+
+
+    @Override
     public void startDocument() throws SAXException
     {
         // initialize our MarkerFeed object - this will hold our parsed contents
@@ -47,11 +46,14 @@ public class MarkerFeedHandler extends DefaultHandler {
         // initialize the MarkerInfo object - we will use this as a crutch to grab the info from the channel
         // because the channel and items have very similar entries..
         _marker = new MarkerInfo();
-
     }
+
+    @Override
     public void endDocument() throws SAXException
     {
     }
+
+    @Override
     public void startElement(String namespaceURI, String localName,String qName, Attributes atts) throws SAXException
     {
         depth++;
@@ -128,11 +130,12 @@ public class MarkerFeedHandler extends DefaultHandler {
             return;
         }
 
-        // if we don't explicitly handle the element, make sure we don't wind up erroneously 
+        // if we don't explicitly handle the element, make sure we don't wind up erroneously
         // storing a newline or other bogus data into one of our existing elements
         currentstate = 0;
     }
-    
+
+    @Override
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException
     {
         depth--;
@@ -143,12 +146,12 @@ public class MarkerFeedHandler extends DefaultHandler {
             return;
         }
     }
-     
+
+    @Override
     public void characters(char ch[], int start, int length)
     {
-        String theString = new String(ch,start,length);
-        //Log.i("NewsStand","characters[" + theString + "]");
-        
+        String theString = new String(ch, start, length);
+
         switch (currentstate)
         {
             case RSS_TITLE:
@@ -194,7 +197,5 @@ public class MarkerFeedHandler extends DefaultHandler {
             default:
                 return;
         }
-        
     }
-
 }
