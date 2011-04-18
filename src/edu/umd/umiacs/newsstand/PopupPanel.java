@@ -32,7 +32,7 @@ public class PopupPanel extends Overlay {
     private final int RECT_MARGIN = 10;
     private final int TEXT_MARGIN = 20;
     private final int ARROW_HEIGHT = 5;
-    private final int ARROW_WIDTH = 40;
+    private final int ARROW_WIDTH = 32;
 
     private int mArrowOffset;
     private boolean mAlignTop;

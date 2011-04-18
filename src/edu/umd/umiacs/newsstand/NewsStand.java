@@ -2,19 +2,23 @@ package edu.umd.umiacs.newsstand;
 
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -35,6 +39,7 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
     public String mSearchQuery;
     private LinearLayout mSearchLayout;
     private TextView mSearchView;
+
 
     @Override
     protected boolean isRouteDisplayed() {
@@ -95,8 +100,12 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
      *
      *  Without delay, the refresh does not always happen. **/
     public void mapUpdateForce() {
+        mapUpdateForce(250);
+    }
+
+    public void mapUpdateForce(int ms) {
         Handler mHandler = new Handler();
-        mHandler.postDelayed(refresh, 250);
+        mHandler.postDelayed(refresh, ms);
     }
 
     private void initMapView() {
@@ -153,8 +162,12 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
             startActivity(i);
             break;
         case R.id.locate:
+            locate();
+            break;
         case R.id.sources:
         case R.id.home:
+            mapView.goToCurrentLocation();
+            break;
         case R.id.top_stories:
         default:
             Toast.makeText(getApplicationContext(),
@@ -207,5 +220,31 @@ public class NewsStand extends MapActivity implements View.OnClickListener {
         if (v == mSearchView) {
             clearSearch();
         }
+    }
+
+    public void locate() {
+        final EditText input = new EditText(this);
+
+        new AlertDialog.Builder(this)
+        .setTitle("Location Query")
+        .setMessage("Enter location to go to:")
+        .setView(input)
+        .setPositiveButton("Go", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Editable value = input.getText();
+                //Toast.makeText(getContext(), "You searched for: " + value, Toast.LENGTH_SHORT).show();
+                mapView.goToPlace(value.toString());
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Do nothing.
+            }
+        }).show();
+    }
+
+    public NewsStand getContext() {
+        return this;
     }
 }

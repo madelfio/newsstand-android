@@ -14,6 +14,6 @@ public class ClusterViewer extends Activity {
 
         mWebView = (WebView) findViewById(R.id.webview);
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://www.google.com");
+        mWebView.loadUrl("http://newsstand.umiacs.umd.edu/news/xml_top_locations?gaz_id=2561668&num_images=1");
     }
 }
