@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -32,10 +30,9 @@ public class NewsStandMapView extends MapView {
 
         initLocate();
 
-        Resources resources = _ctx.getResources();
-        Drawable drawable = resources.getDrawable(
-                R.drawable.marker_general);
-        getOverlays().add(new MarkerOverlay(drawable, context));
+        //Resources resources = _ctx.getResources();
+        //Drawable drawable = resources.getDrawable(R.drawable.marker_general);
+        //getOverlays().add(new MarkerOverlay(drawable, context));
     }
 
     public void setRefresh(Refresh refresh_instance) {
@@ -61,6 +58,7 @@ public class NewsStandMapView extends MapView {
                 int lng = (int) (x.getLongitude() * 1E6);
                 //Toast.makeText(_ctx, x.getExtras().toString(), Toast.LENGTH_SHORT).show();
                 goToLocation(new GeoPoint(lat, lng));
+                mapController.setZoom(10);
             }
         } catch(IOException e) {
             Toast.makeText(_ctx, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -73,6 +71,7 @@ public class NewsStandMapView extends MapView {
 
         Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
         goToLocation(lastKnownLocation);
+        mapController.setZoom(14);
     }
 
     public void goToLocation(Location loc) {
@@ -83,13 +82,18 @@ public class NewsStandMapView extends MapView {
 
     public void goToLocation(GeoPoint loc) {
         mapController.animateTo(loc);
-        mapController.setZoom(14);
         _ctx.mapUpdateForce(1000);
     }
 
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        _ctx.getPanel().hide();
+        if (_ctx.getPanel() == null || _refresh == null) {
+            return super.onInterceptTouchEvent(ev);
+        }
+        else {
+            _ctx.getPanel().hide();
+        }
 
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             long thisTime = System.currentTimeMillis();
