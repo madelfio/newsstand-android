@@ -23,6 +23,7 @@
 	        android:paddingLeft="40px"
 	        android:paddingRight="40px"
 	        android:paddingTop="10px"
+	        android:paddingBottom="10px"
 	        android:saveEnabled="true"
 	        android:max="100" 
 	        android:progress="50"/>
